@@ -46,10 +46,6 @@ cdm <- cdmFromCon(
   .softValidation = TRUE
 )
 
-# Jobs to run
-runAtlasComparison <- TRUE
-runCohortConstructorTest <- FALSE
-
 # Results folder
 output_folder <- here(paste0("Results_", cdmName(cdm), "_", gsub("-", "", Sys.Date())))
 if (!dir.exists(output_folder)) {
