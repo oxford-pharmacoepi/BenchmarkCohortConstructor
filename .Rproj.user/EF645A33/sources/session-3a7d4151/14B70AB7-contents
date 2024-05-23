@@ -11,6 +11,8 @@ library(log4r)
 library(tictoc)
 library(PatientProfiles)
 library(CohortCharacteristics)
+library(CirceR)
+library(SqlRender)
 
 database_name <- "PHARMETRICS"
 
@@ -30,11 +32,11 @@ db <- dbConnect(
   password = password
 )
 
-cdm_database_schema <- "public"
+cdm_database_schema <- "public_100k"
 results_database_schema <- "results"
 
 # cohort stem where cohorts will be instantiated
-table_stem <- "coco"
+table_stem <- "100k_coco"
 
 cdm <- cdmFromCon(
   con = db,

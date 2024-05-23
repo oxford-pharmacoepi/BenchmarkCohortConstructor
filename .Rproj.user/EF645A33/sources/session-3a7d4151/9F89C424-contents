@@ -40,18 +40,6 @@
       ],
       "Hash": "064b48c7c112c78247849bef3a955d8e"
     },
-    "CirceR": {
-      "Package": "CirceR",
-      "Version": "1.3.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "RJSONIO",
-        "rJava"
-      ],
-      "Hash": "2f9522a81dac11183e90b4236afa441d"
-    },
     "CohortCharacteristics": {
       "Package": "CohortCharacteristics",
       "Version": "0.2.0",
@@ -237,16 +225,6 @@
       ],
       "Hash": "45f0398006e83a5b10b72a90663d8d8c"
     },
-    "RJSONIO": {
-      "Package": "RJSONIO",
-      "Version": "1.3-1.9",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "methods"
-      ],
-      "Hash": "2f89abc0f88c647d3386c672632f4baf"
-    },
     "RPostgres": {
       "Package": "RPostgres",
       "Version": "1.4.6",
@@ -303,18 +281,6 @@
         "utils"
       ],
       "Hash": "2042cd9759cc89a453c4aefef0ce9aae"
-    },
-    "SqlRender": {
-      "Package": "SqlRender",
-      "Version": "1.17.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "checkmate",
-        "rJava",
-        "rlang"
-      ],
-      "Hash": "513c5e6da774c913430561a3912c5354"
     },
     "abind": {
       "Package": "abind",
@@ -1434,17 +1400,6 @@
         "survival"
       ],
       "Hash": "1bbc97f7d637ab3917c514a69047b2c1"
-    },
-    "rJava": {
-      "Package": "rJava",
-      "Version": "1.0-11",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "methods"
-      ],
-      "Hash": "524167e771b81342f8dd7a891ed3afa8"
     },
     "rappdirs": {
       "Package": "rappdirs",
