@@ -1,0 +1,122 @@
+# ATLAS ----
+# Timing Atlas
+tic.clearlog()
+tic.clear()
+tic(msg = "Atlas total time:")
+# Instantiate
+covid_json_cohort_set <- readCohortSet(here("JSONCohorts"))
+cdm <- generateCohortSet(
+  cdm = cdm,
+  cohortSet = covid_json_cohort_set |> filter(cohort_definition_id %in% c(1,7)),
+  name = "atlas",
+  computeAttrition = TRUE,
+  overwrite = TRUE
+)
+toc(log = TRUE)
+
+# CohortConstructor ----
+codesTest <- c(
+  586307, 586308, 586309, 586310, 586516, 586517, 586518, 586519, 586520,
+  586523, 586524, 586525, 586526, 586528, 586529, 700360, 702834, 704058,
+  704059, 704975, 704976, 704991, 704992, 704993, 705000, 705001, 705104,
+  705105, 705106, 705107, 706154, 706155, 706156, 706157, 706158, 706159,
+  706160, 706161, 706163, 706164, 706165, 706166, 706167, 706168, 706169,
+  706170, 706171, 706172, 706173, 706174, 706175, 715260, 715261, 715262,
+  715272, 723463, 723464, 723465, 723466, 723467, 723468, 723469, 723470,
+  723471, 723472, 723476, 723477, 723478, 742218, 742219, 742224, 756029,
+  756055, 756065, 756084, 756085, 757677, 757678, 757685, 759520, 759690,
+  759691, 801235, 1616454, 1616841, 1617191, 1617427, 1761840, 1988376,
+  1989033, 1989163, 3015746, 3667069, 3964899, 3964944, 3965194, 36031213,
+  36031238, 36031453, 36031506, 36031652, 36031814, 36031944, 36032174,
+  36032258, 36032286, 36032295, 36033640, 36033642, 36033644, 36033645,
+  36033646, 36033648, 36033649, 36033650, 36033652, 36033653, 36033655,
+  36033656, 36033658, 36033659, 36033660, 36033661, 36033662, 36033663,
+  36033664, 36033665, 36033667, 36659667, 36659749, 36660329, 36660364,
+  36660491, 36661370, 36661371, 36661375, 36661376, 36661377, 36661378,
+  36661384, 37310257, 40218804, 40218805, 40771985, 43055686, 44789510,
+  44807536, 44811805, 45770687, 46236919, 46236920
+)
+positiveTest <- c(9191, 45884084, 45877985, 4181412, 4126681, 45879438)
+codesDiagnostics <- c(
+  700296, 700297, 704995, 704996, 756031, 756039, 3655975, 3655976, 3655977,
+  3656667, 3656668, 3656669, 3661405, 3661406, 3661408, 3661631, 3661632,
+  3661748, 3661885, 3662381, 3663281, 37310254, 37310283, 37310284, 37310286,
+  37310287, 37311061
+)
+
+tic(msg = "CC Diagnostics:")
+cdm$diagnostics <- conceptCohort(
+  cdm = cdm,
+  conceptSet = list("diagnostics" = codesDiagnostics),
+  name = "diagnostics"
+)
+toc(log = TRUE)
+
+tic(msg = "CC Measurement:")
+cdm$tests <- measurementCohort(
+  cdm = cdm,
+  conceptSet = list("tests" = codesTest),
+  name = "tests",
+  valueAsConcept = positiveTest
+)
+toc(log = TRUE)
+
+tic(msg = "CC Bind diagnostics and measurement:")
+cdm <- bind(cdm$diagnostics, cdm$tests, name = "temp001_base")
+toc(log = TRUE)
+
+tic(msg = "CC Union diagnostics and measurement:")
+cdm$temp001_base <- cdm$temp001_base |>
+  CohortConstructor::unionCohorts(cohortName = "cc_base_cohort")
+toc(log = TRUE)
+
+tic(msg = "CC Prior observation + washout + entry date range:")
+cdm$temp001_conditions <- cdm$temp001_base |>
+  requirePriorObservation(180, name = "temp001_conditions") |>
+  requireCohortIntersectFlag(
+    targetCohortTable = "temp001_base",
+    window = list(c(-42, -1)),
+    negate = TRUE
+  ) |>
+  requireInDateRange(dateRange = as.Date(c("2020-03-01", "2020-12-31"))) |>
+  omopgenerics::newCohortTable(
+    cohortSetRef = tibble(cohort_definition_id = 1, cohort_name = "cc_180dpo_6wwo_2020", min_prior_observation = 180,  gap = 0),
+    .softValidation = TRUE
+  )
+toc(log = TRUE)
+
+tic(msg = "CC Stratify:")
+cdm$temp001_strata <- cdm$temp001_conditions |>
+  addDemographics(
+    ageGroup = list(c(0, 30), c(31, 60), c(61, 150)),
+    priorObservation = FALSE,
+    futureObservation = FALSE
+  ) |>
+  stratifyCohorts(strata = list("sex", "age_group"), name = "temp001_strata")
+toc(log = TRUE)
+
+tic(msg = "CC Bind to the same cohort table:")
+cdm <- bind(cdm$temp001_base, cdm$temp001_conditions, cdm$temp001_strata, name = "cohortconstructor")
+toc(log = TRUE)
+
+# cohort overlap
+cdm <- bind(cdm$cohortconstructor, cdm$atlas, name = "overlap")
+overlap <- summariseCohortOverlap(cdm$overlap)
+
+# Save log
+log.lst <- tic.log(format = FALSE)
+log.lst |>
+  purrr::map_df(~as_data_frame(.x)) |>
+  mutate(
+    time = toc - tic,
+    origin = if_else(grepl("CC", msg), "CohortConstructor", "Atlas"),
+    process = gsub("CC ", "", msg),
+    ) |>
+  group_by(origin) |>
+  mutate(total_time = sum(time)) |>
+  select("origin", "process", "time", "total_time") |>
+  write_csv(file = here(output_folder, "timings.csv"))
+
+# save sr
+bind(summary(cdm$atlas), summary(cdm$cohortconstructor), overlap) |>
+  omopgenerics::exportSummarisedResult(fileName = "cc_atlas.csv", path = output_folder)
