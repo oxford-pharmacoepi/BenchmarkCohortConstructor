@@ -55,25 +55,9 @@ if (!dir.exists(output_folder)) {
 }
 
 # Run study
-## comparison
-if (runAtlasComparison) {
-  source(here("AtlasComparison.R"))
-}
-# test CC in RWD
-if (runCohortConstructorTest) {
-  if (!runAtlasComparison) {
-    cdm <- cdmFromCon(
-      con = db,
-      cdmSchema = cdm_database_schema,
-      writeSchema = c("schema" = results_database_schema, "prefix" = tolower(table_stem)),
-      cohortTables = "base",
-      cdmName = database_name,
-      .softValidation = TRUE
-    )
-  }
-  source(here("CohortConstructorTests.R"))
-}
+source(here("AtlasComparison.R"))
 
+# Zip results
 output_folder <- basename(output_folder)
 zip(
   zipfile = paste0(output_folder, ".zip"),
