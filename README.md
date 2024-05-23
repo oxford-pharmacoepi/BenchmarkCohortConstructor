@@ -1,4 +1,4 @@
-Benchmark [CohortConstructor](https://github.com/OHDSI/CohortConstructor/tree/main)
+# Benchmark [CohortConstructor](https://github.com/OHDSI/CohortConstructor/tree/main)
 
 ## To Run
 1) Download this entire repository (you can download as a zip folder using Code -> Download ZIP, or you can use GitHub Desktop). 
