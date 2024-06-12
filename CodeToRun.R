@@ -25,18 +25,18 @@ library(RPostgres)
 
 # Database details
 ## Connection details
-server_dbi <- Sys.getenv("DB_SERVER_DBI_ph")
-user <- Sys.getenv("DB_USER")
-password <- Sys.getenv("DB_PASSWORD")
-port <- Sys.getenv("DB_PORT")
-host <- Sys.getenv("DB_HOST")
+server_dbi <- Sys.getenv("...")
+user <- Sys.getenv("...")
+password <- Sys.getenv("...")
+port <- Sys.getenv("...")
+host <- Sys.getenv("...")
 
 ## Schemas
-cdm_database_schema <- "public_100k"
-results_database_schema <- "results"
+cdm_database_schema <- "..."
+results_database_schema <- "..."
 
 ## Database name
-database_name <- "PHARMETRICS"
+database_name <- "..."
 
 ## cohort stem where cohorts will be instantiated
 table_stem <- "cc"
