@@ -4,24 +4,24 @@ tic.clearlog()
 tic.clear()
 tic(msg = "Atlas Base cohort")
 # Instantiate
-# covid_json_cohort_set <- readCohortSet(here("JSONCohorts"))
-# cdm <- generateCohortSet(
-#   cdm = cdm,
-#   cohortSet = covid_json_cohort_set |> filter(cohort_definition_id == 7),
-#   name = "atlas_base",
-#   computeAttrition = TRUE,
-#   overwrite = TRUE
-# )
-# toc(log = TRUE)
-#
-# tic(msg = "Atlas Requirement and strata cohorts")
-# cdm <- generateCohortSet(
-#   cdm = cdm,
-#   cohortSet = covid_json_cohort_set |> filter(cohort_definition_id != 7),
-#   name = "atlas_requirement",
-#   computeAttrition = TRUE,
-#   overwrite = TRUE
-# )
+covid_json_cohort_set <- readCohortSet(here("JSONCohorts"))
+cdm <- generateCohortSet(
+  cdm = cdm,
+  cohortSet = covid_json_cohort_set |> filter(cohort_definition_id == 7),
+  name = "atlas_base",
+  computeAttrition = TRUE,
+  overwrite = TRUE
+)
+toc(log = TRUE)
+
+tic(msg = "Atlas Requirement and strata cohorts")
+cdm <- generateCohortSet(
+  cdm = cdm,
+  cohortSet = covid_json_cohort_set |> filter(cohort_definition_id != 7),
+  name = "atlas_requirement",
+  computeAttrition = TRUE,
+  overwrite = TRUE
+)
 toc(log = TRUE)
 
 # CohortConstructor ----
@@ -83,10 +83,10 @@ toc(log = TRUE)
 tic(msg = "CC Prior observation + washout + entry date range")
 cdm$temp001_conditions <- cdm$temp001_base |>
   requirePriorObservation(180, name = "temp001_conditions") |>
-  requireCohortIntersect(
+  requireCohortIntersectFlag(
     targetCohortTable = "temp001_base",
     window = list(c(-42, -1)),
-    intersections = 0
+    negate = TRUE
   ) |>
   requireInDateRange(dateRange = as.Date(c("2020-03-01", "2020-12-31"))) |>
   omopgenerics::newCohortTable(
@@ -137,4 +137,3 @@ log.lst |>
 # save sr
 bind(summary(cdm$overlap), overlap) |>
   omopgenerics::exportSummarisedResult(fileName = "summarised_results.csv", path = output_folder)
-

@@ -80,15 +80,14 @@
     },
     "CohortConstructor": {
       "Package": "CohortConstructor",
-      "Version": "0.0.1",
+      "Version": "0.1.0.900",
       "Source": "GitHub",
-      "Remotes": "oxford-pharmacoepi/omock",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortConstructor",
       "RemoteUsername": "ohdsi",
       "RemoteRef": "HEAD",
-      "RemoteSha": "09259bcbdd855732bfdd3de3b3df2528e7e2e818",
+      "RemoteSha": "f0697eda2cf59fa3135259d006f2c5e9dea003c7",
       "Requirements": [
         "CDMConnector",
         "PatientProfiles",
@@ -105,18 +104,18 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "41b515a036e79ea0b8df498d3212a1d9"
+      "Hash": "a387d708088f9e1b08cec2f362ba2d86"
     },
     "DBI": {
       "Package": "DBI",
-      "Version": "1.2.2",
+      "Version": "1.2.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "164809cd72e1d5160b4cb3aa57f510fe"
+      "Hash": "065ae649b05f1ff66bb0c793107508f5"
     },
     "DiagrammeR": {
       "Package": "DiagrammeR",
@@ -193,20 +192,21 @@
     },
     "PatientProfiles": {
       "Package": "PatientProfiles",
-      "Version": "1.0.0",
+      "Version": "1.1.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "PatientProfiles",
       "RemoteUsername": "darwin-eu-dev",
       "RemoteRef": "HEAD",
-      "RemoteSha": "558d23eb16e12743f668beb649d5c28cee2d5ac7",
+      "RemoteSha": "4cb3f1fd4e9fa7eb166a68613ae88abdc57837b3",
       "Requirements": [
         "CDMConnector",
         "R",
         "checkmate",
         "cli",
         "dplyr",
+        "lifecycle",
         "magrittr",
         "omopgenerics",
         "purrr",
@@ -215,7 +215,7 @@
         "tidyr",
         "visOmopResults"
       ],
-      "Hash": "05d14deb20e336a0d87dd8488d03fd08"
+      "Hash": "961587408d2015e198667f1c04ed7332"
     },
     "R6": {
       "Package": "R6",
@@ -330,13 +330,13 @@
     },
     "backports": {
       "Package": "backports",
-      "Version": "1.4.1",
+      "Version": "1.5.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R"
       ],
-      "Hash": "c39fbec8a30d23e721980b8afb31984c"
+      "Hash": "e1e1b9d75c37401117b636b7ae50827a"
     },
     "base64enc": {
       "Package": "base64enc",
@@ -1229,6 +1229,24 @@
       ],
       "Hash": "df58958f293b166e4ab885ebcad90e02"
     },
+    "odbc": {
+      "Package": "odbc",
+      "Version": "1.4.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "DBI",
+        "R",
+        "Rcpp",
+        "bit64",
+        "blob",
+        "hms",
+        "lifecycle",
+        "methods",
+        "rlang"
+      ],
+      "Hash": "8bf8a0865b7b1658a35afe85c126f2e7"
+    },
     "omopgenerics": {
       "Package": "omopgenerics",
       "Version": "0.2.1",
@@ -1501,14 +1519,14 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.3",
+      "Version": "1.1.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "42548638fae05fd9a9b5f3f437fbbbe2"
+      "Hash": "3eec01f8b1dee337674b2e34ab1f9bc1"
     },
     "rmarkdown": {
       "Package": "rmarkdown",
