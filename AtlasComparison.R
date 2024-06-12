@@ -4,24 +4,24 @@ tic.clearlog()
 tic.clear()
 tic(msg = "Atlas Base cohort")
 # Instantiate
-# covid_json_cohort_set <- readCohortSet(here("JSONCohorts"))
-# cdm <- generateCohortSet(
-#   cdm = cdm,
-#   cohortSet = covid_json_cohort_set |> filter(cohort_definition_id == 7),
-#   name = "atlas_base",
-#   computeAttrition = TRUE,
-#   overwrite = TRUE
-# )
-# toc(log = TRUE)
-#
-# tic(msg = "Atlas Requirement and strata cohorts")
-# cdm <- generateCohortSet(
-#   cdm = cdm,
-#   cohortSet = covid_json_cohort_set |> filter(cohort_definition_id != 7),
-#   name = "atlas_requirement",
-#   computeAttrition = TRUE,
-#   overwrite = TRUE
-# )
+covid_json_cohort_set <- readCohortSet(here("JSONCohorts"))
+cdm <- generateCohortSet(
+  cdm = cdm,
+  cohortSet = covid_json_cohort_set |> filter(cohort_definition_id == 7),
+  name = "atlas_base",
+  computeAttrition = TRUE,
+  overwrite = TRUE
+)
+toc(log = TRUE)
+
+tic(msg = "Atlas Requirement and strata cohorts")
+cdm <- generateCohortSet(
+  cdm = cdm,
+  cohortSet = covid_json_cohort_set |> filter(cohort_definition_id != 7),
+  name = "atlas_requirement",
+  computeAttrition = TRUE,
+  overwrite = TRUE
+)
 toc(log = TRUE)
 
 # CohortConstructor ----
