@@ -1,9 +1,0 @@
-cdm_name,origin,process,time,base_cohort_time,total_time
-PHARMETRICS,Atlas,Base cohort,0,0,0
-PHARMETRICS,CohortConstructor,Base cohort - diagnostics,45.64000000000001,74.81,1895.5
-PHARMETRICS,CohortConstructor,Base cohort - measurement,29.169999999999987,74.81,1895.5
-PHARMETRICS,CohortConstructor,Bind diagnostics and measurement,1.4300000000000068,NA,1895.5
-PHARMETRICS,CohortConstructor,Union diagnostics and measurement,3.069999999999993,NA,1895.5
-PHARMETRICS,CohortConstructor,Prior observation + washout + entry date range,1811.8300000000002,NA,1895.5
-PHARMETRICS,CohortConstructor,Stratify,4.3599999999999,NA,1895.5
-PHARMETRICS,Bind all,Bind all,0.13000000000010914,NA,0.13000000000010914
