@@ -11,32 +11,35 @@ library(log4r)
 library(tictoc)
 library(PatientProfiles)
 library(CohortCharacteristics)
+library(CodelistGenerator)
 library(CirceR)
 library(SqlRender)
+library(odbc)
+library(RPostgres)
+library(clock)
 
-database_name <- "..."
+database_name <- "GOLD"
 
 # Connection details
-server_dbi <- Sys.getenv("...")
-user <- Sys.getenv("...")
-password <- Sys.getenv("...")
-port <- Sys.getenv("...")
-host <- Sys.getenv("...")
+server_dbi <- Sys.getenv("DB_SERVER_DBI_gd")
+user <- Sys.getenv("DB_USER")
+password <- Sys.getenv("DB_PASSWORD")
+port <- Sys.getenv("DB_PORT")
+host <- Sys.getenv("DB_HOST")
 
 db <- dbConnect(
-  "...",
+  RPostgres::Postgres(),
   dbname = server_dbi,
   port = port,
   host = host,
   user = user,
   password = password
 )
-
-cdm_database_schema <- "..."
-results_database_schema <- "..."
+cdm_database_schema <- "public_100k"
+results_database_schema <- "results"
 
 # cohort stem where cohorts will be instantiated
-table_stem <- "..."
+table_stem <- "cc"
 
 cdm <- cdmFromCon(
   con = db,
@@ -46,18 +49,10 @@ cdm <- cdmFromCon(
   .softValidation = TRUE
 )
 
-# Results folder
-output_folder <- here(paste0("Results_", cdmName(cdm), "_", gsub("-", "", Sys.Date())))
-if (!dir.exists(output_folder)) {
-  dir.create(output_folder)
-}
+runAtlas <- FALSE
+runCohortConstructorByCohort <- TRUE
+runCohortConstructorSet <- FALSE
+runEvaluateCohorts <- FALSE
 
 # Run study
-source(here("AtlasComparison.R"))
-
-# Zip results
-output_folder <- basename(output_folder)
-zip(
-  zipfile = paste0(output_folder, ".zip"),
-  files = list.files(output_folder, full.names = TRUE)
-)
+source(here("RunStudy.R"))
