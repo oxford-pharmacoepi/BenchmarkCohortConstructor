@@ -1,8 +1,8 @@
 cdm$cc1_neutropenia_leukopenia_concepts <- conceptCohort(
   cdm = cdm,
   conceptSet = codes[c(
-    "neutropenia,_agranulocytosis_or_unspecified_leukopenia",
-    "congenital_or_genetic_neutropenia,_leukopenia_or_agranulocytosis",
+    "neutropenia_agranulocytosis_or_unspecified_leukopenia",
+    "congenital_or_genetic_neutropenia_leukopenia_or_agranulocytosis",
     "neutrophilia"
   )],
   name = "cc1_neutropenia_leukopenia_concepts"
@@ -39,7 +39,7 @@ cdm <- bind(
 )
 
 cdm$cc1_neutropenia_leukopenia <- cdm$cc1_neutropenia_leukopenia |>
-  unionCohorts(cohortName = "cc1_neutropenia_leukopenia") |>
+ CohortConstructor::unionCohorts(cohortName = "cc1_neutropenia_leukopenia") |>
   # No congenital or genetic neutropenia, leukopenia or agranulocytosis
   requireCohortIntersect(
     targetCohortTable = "cc1_neutropenia_leukopenia_concepts",

@@ -2,7 +2,7 @@ cdm$cc1_asthma_base <- conceptCohort(
   cdm = cdm,
   conceptSet = codes[c(
     "asthma_therapy", "asthma",  "chronic_obstructive_lung_disease",
-    "long-acting_muscarinic_antagonists_(lamas)"
+    "long_acting_muscarinic_antagonists_lamas"
   )],
   name = "cc1_asthma_base"
 )
@@ -18,7 +18,7 @@ cdm$cc1_asthma_base <- cdm$cc1_asthma_base |>
   )
 
 cdm$cc1_asthma_no_copd <- cdm$cc1_asthma_base |>
-  unionCohorts(cohortId = 1:2, name = "cc1_asthma_no_copd", cohortName = "cc1_asthma_no_copd") |>
+ CohortConstructor::unionCohorts(cohortId = 1:2, name = "cc1_asthma_no_copd", cohortName = "cc1_asthma_no_copd") |>
   requireIsFirstEntry() |>
   requireCohortIntersect(
     targetCohortTable = "cc1_asthma_base",

@@ -1,6 +1,6 @@
 cdm$cc1_beta_blockers_hypertension <- conceptCohort(
   cdm = cdm,
-  conceptSet = codes[c("[howoften]_beta_blockers", "essential_hypertension")],
+  conceptSet = codes[c("howoften_beta_blockers", "essential_hypertension")],
   name = "cc1_beta_blockers_hypertension"
 ) |>
   requirePriorObservation(

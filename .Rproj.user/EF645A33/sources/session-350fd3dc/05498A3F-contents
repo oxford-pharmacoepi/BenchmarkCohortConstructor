@@ -1,0 +1,11 @@
+# prepare codelists ----
+info(logger, "Read codes from json")
+codes <- codesFromCohort(here("JSONCohorts"), cdm)
+majorNonCardiacSurgery <- codesFromCohort(here("JSONCohorts/major_non_cardiac_surgery.json"), cdm)
+codes <- codes[!names(codes) %in% names(majorNonCardiacSurgery)]
+codes <- c(codes, list("major_non_cardiac_surgery" = unname(unlist(majorNonCardiacSurgery))))
+names(codes) <- gsub(" ", "_", tolower(names(codes)))
+# "[howoften]_inpatient_or_er_visit" == "inpatient_or_inpatient/er_visit"
+# "pneumonectomy" == "lobectomy"
+codes <- codes[!names(codes) %in% c("[howoften]_inpatient_or_er_visit", "lobectomy")]
+names(codes)[names(codes) == "endometriosis_related_laproscopic_procedures_(prevalent_procedures_for_1_endo_dx_cohort)"] <- "endometriosis_related_laproscopic_procedures"

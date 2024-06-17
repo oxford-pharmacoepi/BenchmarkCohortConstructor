@@ -5,7 +5,7 @@ cdm$cc1_hospitalisation <- conceptCohort(
 )
 
 cdm$cc1_hospitalisation <- cdm$cc1_hospitalisation |>
-  cohortCollapse(gap = 1) |>
+  collapseCohorts(gap = 1) |>
   mutate(end_1 = as.Date(add_days(.data$cohort_end_date, 1))) |>
   addFutureObservation(futureObservationType = "date", name = "cc1_hospitalisation") |>
   exitAtFirstDate(dateColumns = c("end_1", "future_observation"), returnReason = FALSE)

@@ -1,15 +1,13 @@
 for (json in jsons$cohort_name) {
-  if (!grepl("covid", json)) {
-    tic(msg = paste0("atlas_", json))
-    cdm <- generateCohortSet(
-      cdm = cdm,
-      cohortSet = jsons |> filter(cohort_name == .env$json),
-      name = paste0("atlas_", json),
-      computeAttrition = TRUE,
-      overwrite = TRUE
-    )
-    toc(log = TRUE)
-  }
+  tic(msg = paste0("atlas_", json))
+  cdm <- generateCohortSet(
+    cdm = cdm,
+    cohortSet = jsons |> filter(cohort_name == .env$json),
+    name = paste0("atlas_", json),
+    computeAttrition = TRUE,
+    overwrite = TRUE
+  )
+  toc(log = TRUE)
 }
 
 tic.log(format = FALSE) |>

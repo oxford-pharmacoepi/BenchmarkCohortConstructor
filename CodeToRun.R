@@ -49,10 +49,10 @@ cdm <- cdmFromCon(
   .softValidation = TRUE
 )
 
-runAtlas <- FALSE
+runAtlas <- TRUE
 runCohortConstructorByCohort <- TRUE
-runCohortConstructorSet <- FALSE
-runEvaluateCohorts <- FALSE
+runCohortConstructorSet <- TRUE
+runEvaluateCohorts <- TRUE
 
 # Run study
 source(here("RunStudy.R"))

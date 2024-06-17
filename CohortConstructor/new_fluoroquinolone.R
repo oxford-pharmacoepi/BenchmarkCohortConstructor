@@ -1,6 +1,6 @@
 cdm$cc1_new_fluoroquinolone <- conceptCohort(
   cdm = cdm,
-  conceptSet = codes["[howoften]_fluoroquinolone_systemic"],
+  conceptSet = codes["howoften_fluoroquinolone_systemic"],
   name = "cc1_new_fluoroquinolone"
 ) |>
   requirePriorObservation(minPriorObservation = 365) |>

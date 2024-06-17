@@ -14,7 +14,7 @@ cdm$cc1_transverse_myelitis_base <- cdm$cc1_transverse_myelitis_base |>
   )
 
 cdm$cc1_transverse_myelitis <- cdm$cc1_transverse_myelitis_base |>
-  unionCohorts(
+ CohortConstructor::unionCohorts(
     cohortName = "cc1_transverse_myelitis",
     name = "cc1_transverse_myelitis"
   )

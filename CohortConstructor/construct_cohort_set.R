@@ -10,14 +10,14 @@ tic(msg = "cc_set_no_strata")
 ## Measurement cohorts ----
 cdm$cc_covid_test_positive <- measurementCohort(
   cdm = cdm,
-  conceptSet = codes["sars-cov-2_test"],
+  conceptSet = codes["sars_cov_2_test"],
   name = "cc_covid_test_positive",
   valueAsConcept = c(4126681, 45877985, 9191, 45884084, 4181412, 45879438)
 )
 
 cdm$cc_covid_test_negative <- measurementCohort(
   cdm = cdm,
-  conceptSet = codes["sars-cov-2_test"],
+  conceptSet = codes["sars_cov_2_test"],
   name = "cc_covid_test_negative",
   valueAsConcept = c(9189, 9190, 9191, 4132135, 3661867, 45878583, 45880296, 45884086)
 )
@@ -45,7 +45,7 @@ cdm$cc_normal_neutrophil <- measurementCohort(
 )
 
 ## Concept cohorts ----
-conceptCohortCodes <- codes[!names(codes) %in% c("sars-cov-2_test", "neutrophil_absolute_count")]
+conceptCohortCodes <- codes[!names(codes) %in% c("sars_cov_2_test", "neutrophil_absolute_count")]
 cdm$cc_base <- conceptCohort(
   cdm = cdm,
   conceptSet = conceptCohortCodes,
@@ -67,7 +67,7 @@ cdm$cc_asthma_no_copd <- cdm$cc_base |>
     cohortId = getIds(cdm$cc_base, c("asthma_therapy")),
     targetCohortId = getIds(cdm$cc_base, c("asthma_therapy"))
   ) |>
-  unionCohorts(cohortName = "cc_asthma_no_copd") |>
+ CohortConstructor::unionCohorts(cohortName = "cc_asthma_no_copd") |>
   requireIsFirstEntry() |>
   requireCohortIntersect(
     targetCohortTable = "cc_base",
@@ -189,7 +189,7 @@ cdm$cc_hospitalisation <- cdm$cc_base |>
     cohortId = getIds(cdm$cc_base, "inpatient_visit"),
     name = "cc_hospitalisation"
   ) |>
-  cohortCollapse(gap = 1) |>
+  collapseCohorts(gap = 1) |>
   mutate(end_1 = as.Date(add_days(.data$cohort_end_date, 1))) |>
   addFutureObservation(futureObservationType = "date", name = "cc_hospitalisation") |>
   exitAtFirstDate(dateColumns = c("end_1", "future_observation"), returnReason = FALSE)
@@ -263,28 +263,32 @@ cdm$cc_transverse_myelitis <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, c("transverse_myelitis", "symptoms_for_transverse_myelitis")),
     name = "cc_transverse_myelitis"
-  ) |>
+  )  |>
   requireCohortIntersect(
     targetCohortTable = "cc_base",
     window = list(c(0, 30)),
     intersections = c(1, Inf),
-    cohortId = getIds(cdm$cc_base, c("symptoms_for_transverse_myelitis")),
+    cohortId = getIds(cdm$cc_transverse_myelitis, c("symptoms_for_transverse_myelitis")),
     targetCohortId = getIds(cdm$cc_base, c("transverse_myelitis"))
-  )  |>
-  unionCohorts(
-    cohortName = "cc_transverse_myelitis",
-    name = "cc_transverse_myelitis"
-  ) |>
-  requireCohortIntersect(
-    targetCohortTable = "cc_base",
-    window = list(c(-365, -1)),
-    intersections = 0,
-    targetCohortId = getIds(cdm$cc_base, c("transverse_myelitis"))
-  ) |>
-  collapseCohorts(gap = 1) |>
-  mutate(start_1 = as.Date(add_days(.data$cohort_start_date, 1))) |>
-  addFutureObservation(futureObservationType = "date", name = "cc_new_fluoroquinolone") |>
-  exitAtFirstDate(dateColumns = c("start_1", "future_observation"), returnReason = FALSE)
+  )
+
+if (nrow(settings(cdm$cc_transverse_myelitis)) > 0) {
+  cdm$cc_transverse_myelitis <- cdm$cc_transverse_myelitis |>
+   CohortConstructor::unionCohorts(
+      cohortName = "cc_transverse_myelitis"
+    ) |>
+    requireCohortIntersect(
+      targetCohortTable = "cc_base",
+      window = list(c(-365, -1)),
+      intersections = 0,
+      targetCohortId = getIds(cdm$cc_base, c("transverse_myelitis"))
+    ) |>
+    collapseCohorts(gap = 1) |>
+    mutate(start_1 = as.Date(add_days(.data$cohort_start_date, 1))) |>
+    addFutureObservation(futureObservationType = "date", name = "cc_transverse_myelitis") |>
+    exitAtFirstDate(dateColumns = c("start_1", "future_observation"), returnReason = FALSE)
+}
+
 
 toc(log = TRUE)
 
@@ -296,6 +300,11 @@ toc(log = TRUE)
 ### cc_covid_male_0_to_50
 ### cc_covid_male_51_to_150
 
+cdm$cc_covid <- cdm$cc_covid |>
+  newCohortTable(
+    cohortSetRef = tibble(cohort_definition_id = 1, cohort_name = "cc_covid")
+  )
+
 tic(msg = "cc_set_strata")
 cdm$cc_covid_strata <- cdm$cc_covid |>
   addDemographics(
@@ -303,7 +312,7 @@ cdm$cc_covid_strata <- cdm$cc_covid |>
     priorObservation = FALSE,
     futureObservation = FALSE
   ) |>
-  stratifyCohorts(strata = list("sex", "age_group", c("sex", "age_group")), name = "temp001_strata")
+  stratifyCohorts(strata = list("sex", "age_group", c("sex", "age_group")), name = "cc_covid_strata")
 toc(log = TRUE)
 
 tic.log(format = FALSE) |>
