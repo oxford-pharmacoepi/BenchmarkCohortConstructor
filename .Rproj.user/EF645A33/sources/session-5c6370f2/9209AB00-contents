@@ -1,0 +1,75 @@
+# Renv
+# renv::activate()
+# renv::restore()
+# .rs.restartR()
+
+# Packages
+library(DBI)
+library(here)
+library(zip)
+library(dbplyr)
+library(dplyr)
+library(CDMConnector)
+library(tidyr)
+library(readr)
+library(CohortConstructor)
+library(log4r)
+library(tictoc)
+library(PatientProfiles)
+library(CohortCharacteristics)
+library(CirceR)
+library(SqlRender)
+library(odbc)
+library(RPostgres)
+
+
+# Database details
+## Connection details
+server_dbi <- Sys.getenv("DB_SERVER_DBI_ph")
+user <- Sys.getenv("DB_USER")
+password <- Sys.getenv("DB_PASSWORD")
+port <- Sys.getenv("DB_PORT")
+host <- Sys.getenv("DB_HOST")
+
+## Schemas
+cdm_database_schema <- "public_100k"
+results_database_schema <- "results"
+
+## Database name
+database_name <- "PHARMETRICS"
+
+## cohort stem where cohorts will be instantiated
+table_stem <- "cc"
+
+# Connexion
+db <- dbConnect(
+  RPostgres::Postgres(),
+  dbname = server_dbi,
+  port = port,
+  host = host,
+  user = user,
+  password = password
+)
+
+cdm <- cdmFromCon(
+  con = db,
+  cdmSchema = cdm_database_schema,
+  writeSchema = c("schema" = results_database_schema, "prefix" = tolower(table_stem)),
+  cdmName = database_name
+)
+
+# Create results folder
+output_folder <- here(paste0("Results_", cdmName(cdm), "_", gsub("-", "", Sys.Date())))
+if (!dir.exists(output_folder)) {
+  dir.create(output_folder)
+}
+
+# Run study
+source(here("AtlasComparison.R"))
+
+# Zip results
+output_folder <- basename(output_folder)
+zip(
+  zipfile = paste0(output_folder, ".zip"),
+  files = list.files(output_folder, full.names = TRUE)
+)
