@@ -1,17 +1,14 @@
 library(visOmopResults)
-library(here)
-library(dbplyr)
-library(dplyr)
-library(tidyr)
 library(readr)
 library(omopgenerics)
 library(ggplot2)
 library(CohortCharacteristics)
+detach("package:zip", unload = TRUE)
 
-source(here("functions.R"))
+source(here("", "functions.R"))
 
-result_patterns <- c("summarised_result", "timings")
-data <- readData(here("Results")) %>% mergeData(result_patterns)
+result_patterns <- c("cc_time_by_domain", "cc_time_by_definition")
+data <- readData(here()) %>% mergeData(result_patterns)
 
 overlap <- data$summarised_result |>
   newSummarisedResult() |>
