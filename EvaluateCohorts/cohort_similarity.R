@@ -123,7 +123,9 @@ cdm <- omopgenerics::bind(
   name = "benchmark_cohorts"
 )
 
+info(logger, "Summarise overlap")
 overlap <- summariseCohortOverlap(cdm$benchmark_cohorts)
+info(logger, "Summarise timing")
 timing <- summariseCohortTiming(cdm$benchmark_cohorts)
 
 omopgenerics::bind(overlap, timing) |>

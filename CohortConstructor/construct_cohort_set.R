@@ -8,6 +8,7 @@ getIds <- function(cohort, cohort_names) {
 # CC set ----
 tic(msg = "cc_set_no_strata")
 ## Measurement cohorts ----
+info(logger, "Measurement cohorts")
 cdm$cc_covid_test_positive <- measurementCohort(
   cdm = cdm,
   conceptSet = codes["sars_cov_2_test"],
@@ -45,6 +46,7 @@ cdm$cc_normal_neutrophil <- measurementCohort(
 )
 
 ## Concept cohorts ----
+info(logger, "Concept cohorts")
 conceptCohortCodes <- codes[!names(codes) %in% c("sars_cov_2_test", "neutrophil_absolute_count")]
 cdm$cc_base <- conceptCohort(
   cdm = cdm,
@@ -54,6 +56,7 @@ cdm$cc_base <- conceptCohort(
 
 ## Get study cohorts ----
 ### cc_asthma_no_copd
+info(logger, "- cc_asthma_no_copd")
 cdm$cc_asthma_no_copd <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, c("asthma_therapy", "asthma")),
@@ -83,6 +86,7 @@ cdm$cc_asthma_no_copd <- cdm$cc_base |>
   )
 
 ### cc_beta_blockers_hypertension
+info(logger, "- cc_beta_blockers_hypertension")
 cdm$cc_beta_blockers_hypertension <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, "howoften_beta_blockers"),
@@ -99,6 +103,7 @@ cdm$cc_beta_blockers_hypertension <- cdm$cc_base |>
   requireIsFirstEntry()
 
 ### cc_covid
+info(logger, "- cc_covid")
 cdm$cc_covid <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, "covid_19"),
@@ -118,6 +123,7 @@ cdm$cc_covid <-  cdm$cc_covid |>
   requireInDateRange(dateRange = c(as.Date("2019-12-02"), NA))
 
 ### cc_endometriosis_procedure
+info(logger, "- cc_endometriosis_procedure")
 endometriosis_id <- getIds(cdm$cc_base, "endometriosis")
 cdm$cc_endometriosis_procedure <- cdm$cc_base |>
   subsetCohorts(
@@ -145,6 +151,7 @@ cdm$cc_endometriosis_procedure <- cdm$cc_base |>
   exitAtObservationEnd()
 
 ### cc_first_depression
+info(logger, "- cc_first_depression")
 cdm$cc_first_depression <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, "major_depressive_disorder"),
@@ -184,6 +191,7 @@ cdm$cc_first_depression <- cdm$cc_base |>
   exitAtObservationEnd()
 
 ### cc_hospitalisation
+info(logger, "- cc_hospitalisation")
 cdm$cc_hospitalisation <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, "inpatient_visit"),
@@ -195,6 +203,7 @@ cdm$cc_hospitalisation <- cdm$cc_base |>
   exitAtFirstDate(dateColumns = c("end_1", "future_observation"), returnReason = FALSE)
 
 ### cc_major_non_cardiac_surgery
+info(logger, "- cc_major_non_cardiac_surgery")
 cdm$cc_major_non_cardiac_surgery <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, "major_non_cardiac_surgery"),
@@ -205,6 +214,7 @@ cdm$cc_major_non_cardiac_surgery <- cdm$cc_base |>
   exitAtObservationEnd()
 
 ### cc_neutropenia_leukopenia
+info(logger, "- cc_neutropenia_leukopenia")
 cdm$cc_neutropenia_leukopenia <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, "neutropenia_agranulocytosis_or_unspecified_leukopenia"),
@@ -249,6 +259,7 @@ cdm$cc_neutropenia_leukopenia <- cdm$cc_neutropenia_leukopenia |>
   exitAtFirstDate(dateColumns = c("cohort_end_date", "normal_count_date"), returnReason = FALSE)
 
 ### cc_new_fluoroquinolone
+info(logger, "- cc_new_fluoroquinolone")
 cdm$cc_new_fluoroquinolone <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, "howoften_fluoroquinolone_systemic"),
@@ -259,11 +270,14 @@ cdm$cc_new_fluoroquinolone <- cdm$cc_base |>
   requireIsFirstEntry()
 
 ### cc_transverse_myelitis
+info(logger, "- cc_transverse_myelitis")
 cdm$cc_transverse_myelitis <- cdm$cc_base |>
   subsetCohorts(
     cohortId = getIds(cdm$cc_base, c("transverse_myelitis", "symptoms_for_transverse_myelitis")),
     name = "cc_transverse_myelitis"
-  )  |>
+  )
+
+cdm$cc_transverse_myelitis <- cdm$cc_transverse_myelitis |>
   requireCohortIntersect(
     targetCohortTable = "cc_base",
     window = list(c(0, 30)),
@@ -293,6 +307,7 @@ if (nrow(settings(cdm$cc_transverse_myelitis)) > 0) {
 toc(log = TRUE)
 
 ## Covid strata ----
+info(logger, "- strata covid cohorts")
 ### cc_covid_female
 ### cc_covid_female_0_to_50
 ### cc_covid_female_51_to_150
