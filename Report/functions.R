@@ -1,9 +1,6 @@
 readData <- function(path) {
-  x <- list.files(path = path)
-  csvFiles <- x[tools::file_ext(x) == "csv"]
-  zipFiles <- x[tools::file_ext(x) == "zip"]
+  zipFiles <- list.files(path = path, pattern = ".zip")
   tempfolder <- tempdir()
-  data <- readFiles(file.path(path, csvFiles))
   for (file in zipFiles) {
     file <- file.path(path, file)
     fname = unzip(file, list = TRUE)$Name

@@ -52,6 +52,34 @@
       ],
       "Hash": "2f9522a81dac11183e90b4236afa441d"
     },
+    "CodelistGenerator": {
+      "Package": "CodelistGenerator",
+      "Version": "3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "DBI",
+        "PatientProfiles",
+        "R",
+        "RJSONIO",
+        "checkmate",
+        "cli",
+        "dplyr",
+        "glue",
+        "lifecycle",
+        "lubridate",
+        "magrittr",
+        "omopgenerics",
+        "purrr",
+        "rlang",
+        "stringr",
+        "tidyr",
+        "tidyselect",
+        "vctrs",
+        "visOmopResults"
+      ],
+      "Hash": "6032c17f4e475042accdd901ec9a8586"
+    },
     "CohortCharacteristics": {
       "Package": "CohortCharacteristics",
       "Version": "0.2.0",
@@ -80,14 +108,9 @@
     },
     "CohortConstructor": {
       "Package": "CohortConstructor",
-      "Version": "0.1.0.900",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "CohortConstructor",
-      "RemoteUsername": "ohdsi",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "f0697eda2cf59fa3135259d006f2c5e9dea003c7",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "CDMConnector",
         "PatientProfiles",
@@ -104,7 +127,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "a387d708088f9e1b08cec2f362ba2d86"
+      "Hash": "ea8f7def13356c92b60b7d68d1a4a71b"
     },
     "DBI": {
       "Package": "DBI",
@@ -538,6 +561,22 @@
         "utils"
       ],
       "Hash": "3f038e5ac7f41d4ac41ce658c85e3042"
+    },
+    "clock": {
+      "Package": "clock",
+      "Version": "0.7.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cli",
+        "cpp11",
+        "lifecycle",
+        "rlang",
+        "tzdb",
+        "vctrs"
+      ],
+      "Hash": "3d8a84cdf9f6f8564531c49b70f3833d"
     },
     "colorspace": {
       "Package": "colorspace",
