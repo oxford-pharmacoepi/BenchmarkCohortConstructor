@@ -6,7 +6,7 @@ cdm <- omopgenerics::bind(
   cdm$atlas_beta_blockers_hypertension,
   cdm$atlas_covid,
   cdm$atlas_endometriosis_procedure,
-  cdm$atlas_first_depression,
+  # cdm$atlas_first_depression,
   cdm$atlas_hospitalisation,
   cdm$atlas_major_non_cardiac_surgery,
   cdm$atlas_neutropenia_leukopenia,
@@ -70,13 +70,13 @@ if (nrow(settings(cdm$cc_endometriosis_procedure)) > 0) {
     )
 }
 
-### cc_first_depression
-if (nrow(settings(cdm$cc_first_depression)) > 0) {
-  cdm$cc_first_depression <- cdm$cc_first_depression |>
-    newCohortTable(
-      cohortSetRef = tibble(cohort_definition_id = getIds(cdm$cc_base, "major_depressive_disorder"), cohort_name = "cc_first_depression")
-    )
-}
+# ### cc_first_depression
+# if (nrow(settings(cdm$cc_first_depression)) > 0) {
+#   cdm$cc_first_depression <- cdm$cc_first_depression |>
+#     newCohortTable(
+#       cohortSetRef = tibble(cohort_definition_id = getIds(cdm$cc_base, "major_depressive_disorder"), cohort_name = "cc_first_depression")
+#     )
+# }
 
 ### cc_hospitalisation
 if (nrow(settings(cdm$cc_hospitalisation)) > 0) {
@@ -107,7 +107,7 @@ cdm <- omopgenerics::bind(
   cdm$cc_beta_blockers_hypertension,
   cdm$cc_covid,
   cdm$cc_endometriosis_procedure,
-  cdm$cc_first_depression,
+  # cdm$cc_first_depression,
   cdm$cc_hospitalisation,
   cdm$cc_major_non_cardiac_surgery,
   cdm$cc_neutropenia_leukopenia,
