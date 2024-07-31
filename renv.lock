@@ -106,14 +106,9 @@
     },
     "CohortConstructor": {
       "Package": "CohortConstructor",
-      "Version": "0.2.1.900",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "CohortConstructor",
-      "RemoteUsername": "ohdsi",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "40ea59eaadcd55267a6dea189daf7fd3fb82b3c7",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "CDMConnector",
         "PatientProfiles",
@@ -130,7 +125,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "2c09a2d9ca2fbe2b0dd62893bf587eea"
+      "Hash": "ea8f7def13356c92b60b7d68d1a4a71b"
     },
     "DBI": {
       "Package": "DBI",
