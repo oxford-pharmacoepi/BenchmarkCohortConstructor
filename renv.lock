@@ -11,9 +11,9 @@
   "Packages": {
     "CDMConnector": {
       "Package": "CDMConnector",
-      "Version": "1.4.0",
+      "Version": "1.5.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "DBI",
         "R",
@@ -38,7 +38,7 @@
         "waldo",
         "withr"
       ],
-      "Hash": "064b48c7c112c78247849bef3a955d8e"
+      "Hash": "2bae94aed83da2007c938f3d2fa1a48f"
     },
     "CirceR": {
       "Package": "CirceR",
@@ -54,9 +54,9 @@
     },
     "CodelistGenerator": {
       "Package": "CodelistGenerator",
-      "Version": "3.0",
+      "Version": "3.1.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "DBI",
         "PatientProfiles",
@@ -78,13 +78,13 @@
         "vctrs",
         "visOmopResults"
       ],
-      "Hash": "6032c17f4e475042accdd901ec9a8586"
+      "Hash": "28c43c5c246965bd64a85065a43f3d53"
     },
     "CohortCharacteristics": {
       "Package": "CohortCharacteristics",
-      "Version": "0.2.0",
+      "Version": "0.2.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "CDMConnector",
         "DiagrammeR",
@@ -94,8 +94,6 @@
         "cli",
         "dplyr",
         "ggpubr",
-        "lifecycle",
-        "lubridate",
         "magrittr",
         "omopgenerics",
         "rlang",
@@ -104,13 +102,18 @@
         "tidyr",
         "visOmopResults"
       ],
-      "Hash": "becea347a297675e635c973b6bc47deb"
+      "Hash": "51aa97d11bb2d0b3dc30e02c0367f70f"
     },
     "CohortConstructor": {
       "Package": "CohortConstructor",
-      "Version": "0.2.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "0.2.1.900",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "CohortConstructor",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "40ea59eaadcd55267a6dea189daf7fd3fb82b3c7",
       "Requirements": [
         "CDMConnector",
         "PatientProfiles",
@@ -127,7 +130,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "ea8f7def13356c92b60b7d68d1a4a71b"
+      "Hash": "2c09a2d9ca2fbe2b0dd62893bf587eea"
     },
     "DBI": {
       "Package": "DBI",
@@ -215,14 +218,9 @@
     },
     "PatientProfiles": {
       "Package": "PatientProfiles",
-      "Version": "1.1.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "PatientProfiles",
-      "RemoteUsername": "darwin-eu-dev",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "4cb3f1fd4e9fa7eb166a68613ae88abdc57837b3",
+      "Version": "1.1.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
       "Requirements": [
         "CDMConnector",
         "R",
@@ -238,7 +236,7 @@
         "tidyr",
         "visOmopResults"
       ],
-      "Hash": "961587408d2015e198667f1c04ed7332"
+      "Hash": "b9a11a277ef3b480b3887b143d12b66c"
     },
     "R6": {
       "Package": "R6",
@@ -339,6 +337,19 @@
       ],
       "Hash": "513c5e6da774c913430561a3912c5354"
     },
+    "V8": {
+      "Package": "V8",
+      "Version": "4.4.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "Rcpp",
+        "curl",
+        "jsonlite",
+        "utils"
+      ],
+      "Hash": "ca98390ad1cef2a5a609597b49d3d042"
+    },
     "abind": {
       "Package": "abind",
       "Version": "1.4-5",
@@ -371,6 +382,16 @@
       ],
       "Hash": "543776ae6848fde2f48ff3816d0628bc"
     },
+    "bigD": {
+      "Package": "bigD",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "93637e906f3fe962413912c956eb44db"
+    },
     "bit": {
       "Package": "bit",
       "Version": "4.0.5",
@@ -394,6 +415,13 @@
         "utils"
       ],
       "Hash": "9fe98599ca456d6552421db0d6772d8f"
+    },
+    "bitops": {
+      "Package": "bitops",
+      "Version": "1.0-7",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "b7d8d8ee39869c18d8846a184dd8a1af"
     },
     "blob": {
       "Package": "blob",
@@ -531,26 +559,26 @@
     },
     "checkmate": {
       "Package": "checkmate",
-      "Version": "2.3.1",
+      "Version": "2.3.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "backports",
         "utils"
       ],
-      "Hash": "c01cab1cb0f9125211a6fc99d540e315"
+      "Hash": "0e14e01ce07e7c88fd25de6d4260d26b"
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.6.2",
+      "Version": "3.6.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "1216ac65ac55ec0058a6f75d7ca0fd52"
+      "Hash": "b21916dd77a27642b447374a5d30ecf3"
     },
     "clipr": {
       "Package": "clipr",
@@ -592,6 +620,13 @@
       ],
       "Hash": "f20c47fd52fae58b4e377c37bb8c335b"
     },
+    "commonmark": {
+      "Package": "commonmark",
+      "Version": "1.9.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "5d8225445acb167abf7797de48b2ee3c"
+    },
     "corrplot": {
       "Package": "corrplot",
       "Version": "0.92",
@@ -628,15 +663,25 @@
     },
     "crayon": {
       "Package": "crayon",
-      "Version": "1.5.2",
+      "Version": "1.5.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "grDevices",
         "methods",
         "utils"
       ],
-      "Hash": "e8a1e41acf02548751f45c718d55aa6a"
+      "Hash": "859d96e65ef198fd43e82b9628d593ef"
+    },
+    "curl": {
+      "Package": "curl",
+      "Version": "5.2.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "411ca2c03b1ce5f548345d2fc2685f7a"
     },
     "dbplyr": {
       "Package": "dbplyr",
@@ -917,6 +962,36 @@
       ],
       "Hash": "7d7f283939f563670a697165b2cf5560"
     },
+    "gt": {
+      "Package": "gt",
+      "Version": "0.10.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "base64enc",
+        "bigD",
+        "bitops",
+        "cli",
+        "commonmark",
+        "dplyr",
+        "fs",
+        "glue",
+        "htmltools",
+        "htmlwidgets",
+        "juicyjuice",
+        "magrittr",
+        "markdown",
+        "reactable",
+        "rlang",
+        "sass",
+        "scales",
+        "tidyselect",
+        "vctrs",
+        "xml2"
+      ],
+      "Hash": "03009c105dfae79460b8eb9d8cf791e4"
+    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.5",
@@ -1052,6 +1127,16 @@
       ],
       "Hash": "e1b9c55281c5adc4dd113652d9e26768"
     },
+    "juicyjuice": {
+      "Package": "juicyjuice",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "V8"
+      ],
+      "Hash": "3bcd11943da509341838da9399e18bce"
+    },
     "knitr": {
       "Package": "knitr",
       "Version": "1.46",
@@ -1162,6 +1247,19 @@
         "R"
       ],
       "Hash": "7ce2733a9826b3aeb1775d56fd305472"
+    },
+    "markdown": {
+      "Package": "markdown",
+      "Version": "1.12",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "commonmark",
+        "utils",
+        "xfun"
+      ],
+      "Hash": "765cf53992401b3b6c297b69e1edb8bd"
     },
     "memoise": {
       "Package": "memoise",
@@ -1288,9 +1386,9 @@
     },
     "omopgenerics": {
       "Package": "omopgenerics",
-      "Version": "0.2.1",
+      "Version": "0.2.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "cli",
@@ -1303,7 +1401,7 @@
         "stringr",
         "tidyr"
       ],
-      "Hash": "b696a8bc173331b645f23d098a4baafd"
+      "Hash": "455369900c393d3eb843fcbd056e1a9c"
     },
     "pbkrtest": {
       "Package": "pbkrtest",
@@ -1512,6 +1610,31 @@
         "R"
       ],
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
+    },
+    "reactR": {
+      "Package": "reactR",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "htmltools"
+      ],
+      "Hash": "c9014fd1a435b2d790dd506589cb24e5"
+    },
+    "reactable": {
+      "Package": "reactable",
+      "Version": "0.4.4",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "digest",
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "reactR"
+      ],
+      "Hash": "6069eb2a6597963eae0605c1875ff14c"
     },
     "readr": {
       "Package": "readr",
@@ -1989,6 +2112,19 @@
         "tools"
       ],
       "Hash": "317a0538d32f4a009658bcedb7923f4b"
+    },
+    "xml2": {
+      "Package": "xml2",
+      "Version": "1.3.6",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "cli",
+        "methods",
+        "rlang"
+      ],
+      "Hash": "1d0336142f4cd25d8d23cd3ba7a8fb61"
     },
     "yaml": {
       "Package": "yaml",

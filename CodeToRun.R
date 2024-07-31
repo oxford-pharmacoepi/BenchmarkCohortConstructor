@@ -18,14 +18,14 @@ library(odbc)
 library(RPostgres)
 library(clock)
 
-database_name <- "GOLD"
+database_name <- "..."
 
 # Connection details
-server_dbi <- Sys.getenv("DB_SERVER_DBI_gd")
-user <- Sys.getenv("DB_USER")
-password <- Sys.getenv("DB_PASSWORD")
-port <- Sys.getenv("DB_PORT")
-host <- Sys.getenv("DB_HOST")
+server_dbi <- Sys.getenv("...")
+user <- Sys.getenv("...")
+password <- Sys.getenv("...")
+port <- Sys.getenv("...")
+host <- Sys.getenv("...")
 
 db <- dbConnect(
   RPostgres::Postgres(),
@@ -35,19 +35,11 @@ db <- dbConnect(
   user = user,
   password = password
 )
-cdm_database_schema <- "public_100k"
-results_database_schema <- "results"
+cdm_database_schema <- "..."
+results_database_schema <- "..."
 
-# cohort stem where cohorts will be instantiated
-table_stem <- "cc"
-
-cdm <- cdmFromCon(
-  con = db,
-  cdmSchema = cdm_database_schema,
-  writeSchema = c("schema" = results_database_schema, "prefix" = tolower(table_stem)),
-  cdmName = database_name,
-  .softValidation = TRUE
-)
+# study prefix
+table_stem <- "..."
 
 runAtlas <- TRUE
 runCohortConstructorByCohort <- TRUE

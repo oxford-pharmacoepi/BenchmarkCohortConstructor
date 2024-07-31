@@ -14,3 +14,6 @@ tic.log(format = FALSE) |>
   purrr::map_df(~as_data_frame(.x)) |>
   mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
   write_csv(file = here(output_folder, "atlas_time.csv"))
+
+
+cohorts <- c("hospitalisation", "major_non_cardiac_surgery", "neutropenia_leukopenia", "new_fluoroquinolone", "transverse_myelitis")
