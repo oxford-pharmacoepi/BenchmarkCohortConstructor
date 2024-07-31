@@ -28,3 +28,7 @@ mergeData <- function(data, patterns) {
   }
   return(x)
 }
+
+niceNum <- function(x, dec = 0) {
+  trimws(format(round(as.numeric(x), dec), big.mark = ",", nsmall = dec, scientific = FALSE))
+}
