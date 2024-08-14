@@ -1363,7 +1363,7 @@
     },
     "odbc": {
       "Package": "odbc",
-      "Version": "1.4.2",
+      "Version": "1.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1372,12 +1372,13 @@
         "Rcpp",
         "bit64",
         "blob",
+        "cli",
         "hms",
         "lifecycle",
         "methods",
         "rlang"
       ],
-      "Hash": "8bf8a0865b7b1658a35afe85c126f2e7"
+      "Hash": "0609d24c52744c675f8578622c33d5fa"
     },
     "omopgenerics": {
       "Package": "omopgenerics",
