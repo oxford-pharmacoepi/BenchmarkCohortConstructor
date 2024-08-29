@@ -106,9 +106,15 @@
     },
     "CohortConstructor": {
       "Package": "CohortConstructor",
-      "Version": "0.2.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "0.2.2",
+      "Source": "GitHub",
+      "Remotes": "darwin-eu-dev/omopgenerics",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "CohortConstructor",
+      "RemoteUsername": "ohdsi",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "4bf78172640f8611a4fd4acc89d6dea7974e4cb8",
       "Requirements": [
         "CDMConnector",
         "PatientProfiles",
@@ -125,7 +131,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "ea8f7def13356c92b60b7d68d1a4a71b"
+      "Hash": "1eada2a2efbad492c71d2ab309211316"
     },
     "DBI": {
       "Package": "DBI",
@@ -648,13 +654,13 @@
     },
     "cpp11": {
       "Package": "cpp11",
-      "Version": "0.4.7",
+      "Version": "0.5.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R"
       ],
-      "Hash": "5a295d7d963cc5035284dcdbaf334f4e"
+      "Hash": "91570bba75d0c9d3f1040c835cee8fba"
     },
     "crayon": {
       "Package": "crayon",
@@ -1382,22 +1388,30 @@
     },
     "omopgenerics": {
       "Package": "omopgenerics",
-      "Version": "0.2.3",
-      "Source": "Repository",
-      "Repository": "RSPM",
+      "Version": "0.3.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "omopgenerics",
+      "RemoteUsername": "darwin-eu-dev",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "45b5da3598454dd18face1564bb2bdf74cae0cc5",
       "Requirements": [
         "R",
         "cli",
         "dbplyr",
         "dplyr",
         "glue",
+        "lifecycle",
         "methods",
+        "purrr",
         "rlang",
         "snakecase",
         "stringr",
-        "tidyr"
+        "tidyr",
+        "vctrs"
       ],
-      "Hash": "455369900c393d3eb843fcbd056e1a9c"
+      "Hash": "d130e6c091350c1b880a8f8ed85d21e9"
     },
     "pbkrtest": {
       "Package": "pbkrtest",
@@ -2069,33 +2083,32 @@
     },
     "waldo": {
       "Package": "waldo",
-      "Version": "0.5.2",
+      "Version": "0.5.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "cli",
         "diffobj",
-        "fansi",
         "glue",
         "methods",
         "rematch2",
         "rlang",
         "tibble"
       ],
-      "Hash": "c7d3fd6d29ab077cbac8f0e2751449e6"
+      "Hash": "16aa934a49658677d8041df9017329b9"
     },
     "withr": {
       "Package": "withr",
-      "Version": "3.0.0",
+      "Version": "3.0.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "grDevices",
         "graphics"
       ],
-      "Hash": "d31b6c62c10dcf11ec530ca6b0dd5d35"
+      "Hash": "07909200e8bbe90426fbfeb73e1e27aa"
     },
     "xfun": {
       "Package": "xfun",
