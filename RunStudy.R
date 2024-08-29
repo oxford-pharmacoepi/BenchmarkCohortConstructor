@@ -1,10 +1,10 @@
-#Checks
+# Checks
 if (nchar(table_stem) > 10){
   cli::cli_abort(c("x" = "`table_stem` should be less than 10 characters."))
 }
 
 # Results folder ----
-output_folder <- here(paste0("Results_", database_name, "_", gsub("-", "", Sys.Date())))
+output_folder <- here(paste0("Results_", database_name))
 if (!dir.exists(output_folder)) {
   dir.create(output_folder)
 }

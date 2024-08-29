@@ -2,4 +2,5 @@
 AtlasComparison.R
 CodeToRunDevelop.R
 .Rproj*
+.Rproj.user\*
 .Rhistory

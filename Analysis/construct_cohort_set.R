@@ -365,13 +365,21 @@ cdm$cc_covid_strata <- cdm$cc_covid |>
     priorObservation = FALSE,
     futureObservation = FALSE
   ) |>
-  stratifyCohorts(strata = list("sex", "age_group", c("sex", "age_group")), name = "cc_covid_strata")
+  stratifyCohorts(strata = list("sex", c("sex", "age_group")), name = "cc_covid_strata")
 
-ids <- settings(cdm$cc_covid_strata) |>
-  filter(strata_columns != "age_group") |>
-  dplyr::pull("cohort_definition_id")
-cdm$cc_covid_strata <- cdm$cc_covid_strata |> subsetCohorts(cohortId = ids)
-
+if (cdm$cc_covid_strata |> dplyr::tally() |> dplyr::pull("n") == 0) {
+  cdm$cc_covid_strata <- cdm$cc_covid_strata |>
+    newCohortTable(
+      cohortSetRef = tibble(
+        cohort_definition_id = 1:6,
+        cohort_name = c(
+          "cc_covid_female", "cc_covid_male", "cc_covid_female_0_to_50",
+          "cc_covid_female_51_to_150", "cc_covid_male_0_to_50", "cc_covid_male_51_to_150"
+        )
+      ),
+      cohortAttritionRef = NULL
+    )
+}
 
 toc(log = TRUE)
 
