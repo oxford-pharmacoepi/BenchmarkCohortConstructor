@@ -28,7 +28,7 @@ port <- Sys.getenv("...")
 host <- Sys.getenv("...")
 
 db <- dbConnect(
-  RPostgres::Postgres(),
+  "...",
   dbname = server_dbi,
   port = port,
   host = host,
