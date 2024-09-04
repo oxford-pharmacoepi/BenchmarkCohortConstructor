@@ -13,7 +13,7 @@ for (json in jsons$cohort_name) {
 tic.log(format = FALSE) |>
   purrr::map_df(~as_data_frame(.x)) |>
   mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
-  write_csv(file = here(output_folder, "atlas_time.csv"))
+  write_csv(file = here(output_folder, paste0("atlas_time_", database_name, ".csv")))
 
 
 cohorts <- c("hospitalisation", "major_non_cardiac_surgery", "neutropenia_leukopenia", "new_fluoroquinolone", "transverse_myelitis")

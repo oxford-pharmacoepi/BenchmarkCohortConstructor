@@ -1,4 +1,11 @@
-# Checks
+# functions ----
+getIds <- function(cohort, cohort_names) {
+  settings(cohort) |>
+    filter(.data$cohort_name %in% .env$cohort_names) |>
+    pull("cohort_definition_id")
+}
+
+# Checks ----
 if (nchar(table_stem) > 10){
   cli::cli_abort(c("x" = "`table_stem` should be less than 10 characters."))
 }
@@ -73,7 +80,7 @@ concept_sets <- c(
   "sars_cov_2_test",
   "neutrophil_absolute_count"
 )
-codes <- as.list(rep(192836451920927, length(concept_sets))) # mock concept as pleace-holder
+codes <- as.list(rep(100001L, length(concept_sets))) # mock concept as pleace-holder
 names(codes) <- concept_sets
 codes_cdm <- codesFromCohort(here("JSONCohorts"), cdm)
 majorNonCardiacSurgery <- codesFromCohort(here("JSONCohorts/major_non_cardiac_surgery.json"), cdm)
@@ -108,7 +115,7 @@ if (runCohortConstructorByCohort) {
   tic.log(format = FALSE) |>
     purrr::map_df(~as_data_frame(.x)) |>
     mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
-    write_csv(file = here(output_folder, "cc_time_by_definition.csv"))
+    write_csv(file = here(output_folder, paste0("cc_time_by_definition_", database_name, ".csv")))
 }
 
 if (runCohortConstructorSet) {

@@ -4,63 +4,56 @@ library(omopgenerics)
 library(ggplot2)
 library(CohortCharacteristics)
 library(stringr)
-detach("package:zip", unload = TRUE)
+library(here)
+library(dplyr)
+library(tidyr)
+library(gt)
+# detach("package:zip", unload = TRUE)
 
 source(here("Report", "functions.R"))
 
-result_patterns <- c("time")
+result_patterns <- c("time", "comparison", "details")
 data <- readData(here()) %>% mergeData(result_patterns)
 
-# overlap <- data$summarised_result |>
-#   newSummarisedResult() |>
-#   filterSettings(result_type == "cohort_overlap")
-#
-# overlap |>
-#   splitGroup() |>
-#   filter(grepl("atlas_", cohort_name_reference) & grepl("cc_", cohort_name_comparator)) |>
-#   filter(gsub("atlas_", "", cohort_name_reference) == gsub("cc_", "", cohort_name_comparator)) |>
-#   mutate(cohort_name_reference = "",
-#          cohort_name_comparator = gsub("cc_", "", cohort_name_comparator)) |>
-#   uniteGroup(cols = c("cohort_name_reference", "cohort_name_comparator")) |>
-#   plotCohortOverlap(facet = "cdm_name") |>
-#   ggsave(filename = "overlap.png", device = "png")
-
-## By definition
-data$time |>
-  union_all(
-    tibble(
-      package_version = "0.2.1",
-      cdm_name = "GOLD",
-      msg = paste0(
-        "atlas_",
-        c("asthma_no_copd", "beta_blockers_hypertension", "covid", "covid_female",
-          "covid_female_0_to_50", "covid_female_51_to_150", "covid_male",
-          "covid_male_0_to_50", "covid_male_51_to_150", "endometriosis_procedure"
-        )),
-      tic = "0",
-      toc = as.character(c(500.01, 53.61, 2857.13, 1615.47, 1110.53, 502.58, 1310.18, 840.35, 479.45, 49.1)),
-      callback_msg = NA
-    )
+## Cohort counts ----
+cohortCount <- data$details |>
+  filterSettings(result_type == "cohort_count") |>
+  tidy(addSettings = FALSE) |>
+  select(-variable_level, - result_id) |>
+  # pivot_wider(values_from = "count", names_from = "variable_name")
+cohortCount |>
+  mutate(
+    Tool = if_else(grepl("cc", cohort_name), "CohortConstructor", "CIRCE"),
+    "Cohort name" = str_to_sentence(gsub("_", " ", gsub("cc_|atlas_", "", cohort_name))),
+    variable_name = stringr::str_to_sentence(gsub("_", " ", .data$variable_name))
   ) |>
+  select(-cohort_name) |>
+  pivot_wider(names_from = c("cdm_name", "variable_name"), values_from = c("count"), names_prefix = "[header]Database name\n[header_level]", names_sep = "\n[header_level]") %>%
+  visOmopResults::gtTable()
+
+## By definition ----
+header_prefix <- "[header]Time by database (minutes)\n[header_level]"
+data$time |>
   distinct() |>
   filter(!grepl("male|set", msg)) |>
   mutate(
-    cdm_name = "CPRD Gold",
-    time = niceNum((as.numeric(toc) - as.numeric(tic))/60, 3),
+    time = niceNum((as.numeric(toc) - as.numeric(tic))/60, 2),
     Tool = if_else(grepl("cc", msg), "CohortConstructor", "CIRCE"),
     "Cohort name" = str_to_sentence(gsub("_", " ", gsub("cc_|atlas_", "", msg)))
   ) |>
-  pivot_wider(names_from = "cdm_name", values_from = "time", names_prefix = "[header]Time by database (minutes)\n[header_level]") |>
+  select(-c("tic", "toc", "msg", "callback_msg")) |>
+  # inner_join(cohortCount |> rename("msg" = "cohort_name"), by = c("msg", "cdm_name")) |>
+  pivot_wider(names_from = "cdm_name", values_from = "time", names_prefix = header_prefix) |>
   # select(all_of(c("Cohort name", "Tool")), starts_with("[header]Time")) |>
   # just while there is 1 database
-  select("Cohort name", "Tool", "Time (minutes)" = "[header]Time by database (minutes)\n[header_level]CPRD Gold") |>
-  union_all(
-    tibble(
-      `Cohort name` = "First depression",
-      `Time (minutes)` = "> 2880",
-      "Tool" = "CIRCE"
-    )
-  ) |>
+  select(c("Cohort name", "Tool", paste0(header_prefix, data$time$cdm_name |> unique()))) |>
+  # union_all(
+  #   tibble(
+  #     `Cohort name` = "First depression",
+  #     `Time (minutes)` = "> 2880",
+  #     "Tool" = "CIRCE"
+  #   )
+  # ) |>
   mutate(
     "Cohort name" = case_when(
       grepl("Asthma", .data[["Cohort name"]]) ~ "Asthma without COPD",
@@ -76,71 +69,96 @@ data$time |>
   arrange(`Cohort name`) |>
   gtTable(colsToMergeRows = "all_columns") |>
   gt::cols_width(`Cohort name` ~ 300) |>
-  gt::gtsave(filename = here("Report", "bycohort.png"), expand = 70)
+  gt::gtsave(filename = here("Report", "ReportResults", "bycohort.png"), expand = 70)
 
-## As a set
+## As a set ----
 data$time |>
-  union_all(
-    tibble(
-      package_version = "0.2.1",
-      cdm_name = "GOLD",
-      msg = paste0(
-        "atlas_",
-        c("asthma_no_copd", "beta_blockers_hypertension", "covid", "covid_female",
-          "covid_female_0_to_50", "covid_female_51_to_150", "covid_male",
-          "covid_male_0_to_50", "covid_male_51_to_150", "endometriosis_procedure"
-        )),
-      tic = "0",
-      toc = as.character(c(500.01, 53.61, 2857.13, 1615.47, 1110.53, 502.58, 1310.18, 840.35, 479.45, 49.1)),
-      callback_msg = NA
-    )
-  ) |>
   distinct() |>
   filter(grepl("atlas", msg)) |>
   filter(!grepl("male", msg)) |>
   group_by(cdm_name) |>
-  summarise(time = niceNum(sum(as.numeric(toc) - as.numeric(tic))/60, 3)) |>
+  summarise(time = niceNum(sum(as.numeric(toc) - as.numeric(tic))/60, 2)) |>
   mutate(Tool = "CIRCE") |>
   union_all(
     data$time |>
       filter(msg == "cc_set_no_strata") |>
       group_by(cdm_name) |>
-      summarise(time = niceNum(sum(as.numeric(toc) - as.numeric(tic))/60, 3)) |>
+      summarise(time = niceNum(sum(as.numeric(toc) - as.numeric(tic))/60, 2)) |>
       mutate(Tool = "CohortConstructor")
   ) |>
-  pivot_wider(names_from = "Tool", values_from = "time", names_prefix = "[header]Time (minutes)\n[header_level]") |>
-  select("Database" = "cdm_name", starts_with("[header]Time")) |>
-  mutate("Database" = "CPRD Gold") |>
+  select("Tool", "Time (minutes)" = "time") |>
+  # pivot_wider(names_from = "Tool", values_from = "time", names_prefix = "[header]Time (minutes)\n[header_level]") |>
+  # select("Database" = "cdm_name", starts_with("[header]Time")) |>
+  # mutate("Database" = "CPRD Gold") |>
   gtTable(colsToMergeRows = "all_columns") |>
-  gt::gtsave(filename = here("Report", "set.png"))
+  gt::cols_width(everything() ~ px(150)) |>
+  gt::gtsave(filename = here("Report", "set.png"), expand = 70)
 
 
-## Strata
+## Strata ----
 data$time |>
-  union_all(
-    tibble(
-      package_version = "0.2.1",
-      cdm_name = "GOLD",
-      msg = paste0(
-        "atlas_",
-        c("asthma_no_copd", "beta_blockers_hypertension", "covid", "covid_female",
-          "covid_female_0_to_50", "covid_female_51_to_150", "covid_male",
-          "covid_male_0_to_50", "covid_male_51_to_150", "endometriosis_procedure"
-        )),
-      tic = "0",
-      toc = as.character(c(500.01, 53.61, 2857.13, 1615.47, 1110.53, 502.58, 1310.18, 840.35, 479.45, 49.1)),
-      callback_msg = NA
-    )
-  ) |>
   distinct() |>
   filter(grepl("atlas_covid|set_strata", msg) | msg == "cc_covid") |>
   filter(msg != "atlas_covid") |>
   mutate(Tool = if_else(grepl("cc", msg), "CohortConstructor", "CIRCE")) |>
   group_by(cdm_name, Tool) |>
-  summarise(time = niceNum(sum(as.numeric(toc) - as.numeric(tic))/60, 3), .groups = "drop") |>
-  pivot_wider(names_from = "Tool", values_from = "time", names_prefix = "[header]Time (minutes)\n[header_level]") |>
-  select("Database" = "cdm_name", starts_with("[header]Time")) |>
-  gtTable(colsToMergeRows = "all_columns")|>
-  gt::gtsave(filename = here("Report", "strata.png"))
+  summarise(time = niceNum(sum(as.numeric(toc) - as.numeric(tic))/60, 2), .groups = "drop") |>
+  select("Tool", "Time (minutes)" = "time") |>
+  # pivot_wider(names_from = "Tool", values_from = "time", names_prefix = "[header]Time (minutes)\n[header_level]") |>
+  # select("Database" = "cdm_name", starts_with("[header]Time")) |>
+  # mutate("Database" = "CPRD Gold") |>
+  gtTable(colsToMergeRows = "all_columns") |>
+  gt::cols_width(everything() ~ px(150)) |>
+  gt::gtsave(filename = here("Report", "strata.png"), expand = 70)
 
 
+## Overlap ----
+overlap <- data$comparison |>
+  filterSettings(result_type == "cohort_overlap")
+
+overlap |>
+  splitGroup() |>
+  filter(grepl("atlas_", cohort_name_reference) & grepl("cc_", cohort_name_comparator)) |>
+  filter(gsub("atlas_", "", cohort_name_reference) == gsub("cc_", "", cohort_name_comparator)) |>
+  # mutate(cohort_name_reference = "",
+  #        cohort_name_comparator = gsub("cc_", "", cohort_name_comparator)) |>
+  uniteGroup(cols = c("cohort_name_reference", "cohort_name_comparator")) |>
+  plotCohortOverlap(facet = "cdm_name") +
+  ggtitle("Atlas vs. CohortConstructor by domain")
+  # ggsave(filename = "overlap_atlas_domain.png", device = "png")
+
+
+overlap |>
+  splitGroup() |>
+  filter(grepl("cc1_", cohort_name_reference) & grepl("cc_", cohort_name_comparator)) |>
+  filter(gsub("cc1_", "", cohort_name_reference) == gsub("cc_", "", cohort_name_comparator)) |>
+  # mutate(cohort_name_reference = "",
+  #        cohort_name_comparator = gsub("cc_", "", cohort_name_comparator)) |>
+  uniteGroup(cols = c("cohort_name_reference", "cohort_name_comparator")) |>
+  plotCohortOverlap(facet = "cdm_name") +
+  ggtitle("CohortConstructor by definition vs. CohortConstructor by domain")
+
+overlap |>
+  splitGroup() |>
+  filter(grepl("cc1_", cohort_name_reference) & grepl("atlas_", cohort_name_comparator)) |>
+  filter(gsub("cc1_", "", cohort_name_reference) == gsub("atlas_", "", cohort_name_comparator)) |>
+  # mutate(cohort_name_reference = "",
+  #        cohort_name_comparator = gsub("cc_", "", cohort_name_comparator)) |>
+  uniteGroup(cols = c("cohort_name_reference", "cohort_name_comparator")) |>
+  plotCohortOverlap(facet = "cdm_name") +
+  ggtitle("CohortConstructor by definition vs. Atlas")
+#
+# ## Density ----
+# density <- data$comparison |>
+#   filterSettings(result_type == "cohort_timing")
+#
+# density |> plotCohortTiming(colour = "group_level")
+#   splitGroup() |>
+#   filter(grepl("atlas_", cohort_name_reference) & grepl("cc_", cohort_name_comparator)) |>
+#   filter(gsub("atlas_", "", cohort_name_reference) == gsub("cc_", "", cohort_name_comparator)) |>
+#   # mutate(cohort_name_reference = "",
+#   #        cohort_name_comparator = gsub("cc_", "", cohort_name_comparator)) |>
+#   uniteGroup(cols = c("cohort_name_reference", "cohort_name_comparator")) |>
+#   plotCohortTiming(facet = "cdm_name") +
+#   ggtitle("Atlas vs. CohortConstructor by domain")
+# # ggsave(filename = "overlap_atlas_domain.png", device = "png")
