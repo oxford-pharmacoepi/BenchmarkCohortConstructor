@@ -9,8 +9,8 @@ cdm$temp_cc1_transverse_myelitis_base <- cdm$temp_cc1_transverse_myelitis_base |
     targetCohortTable = "temp_cc1_transverse_myelitis_base",
     window = list(c(0, 30)),
     intersections = c(1, Inf),
-    cohortId = 2,
-    targetCohortId = 1,
+    cohortId = getIds(cdm$temp_cc1_transverse_myelitis_base, "symptoms_for_transverse_myelitis"),
+    targetCohortId = getIds(cdm$temp_cc1_transverse_myelitis_base, "transverse_myelitis"),
     targetEndDate = NULL
   )
 
@@ -22,10 +22,10 @@ cdm$cc1_transverse_myelitis <- cdm$temp_cc1_transverse_myelitis_base |>
 
 cdm$cc1_transverse_myelitis <- cdm$cc1_transverse_myelitis |>
   requireCohortIntersect(
-    targetCohortTable = "cc1_transverse_myelitis",
+    targetCohortTable = "temp_cc1_transverse_myelitis_base",
     window = list(c(-365, -1)),
     intersections = 0,
-    targetCohortId = 1,
+    targetCohortId = getIds(cdm$temp_cc1_transverse_myelitis_base, "transverse_myelitis"),
     targetEndDate = NULL
   ) |>
   collapseCohorts(gap = 1) |>

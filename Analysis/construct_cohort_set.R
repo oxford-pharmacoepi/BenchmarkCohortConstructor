@@ -386,4 +386,4 @@ toc(log = TRUE)
 tic.log(format = FALSE) |>
   purrr::map_df(~as_data_frame(.x)) |>
   mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
-  write_csv(file = here(output_folder, "cc_time_by_domain.csv"))
+  write_csv(file = here(output_folder, paste0("cc_time_by_domain_", database_name, ".csv")))

@@ -22,7 +22,8 @@ cdm <- omopgenerics::bind(
 )
 cdm$atlas <- cdm$atlas |>
   newCohortTable(
-    cohortSetRef = settings(cdm$atlas) |> mutate(cohort_name = paste0("atlas_", cohort_name))
+    cohortSetRef = settings(cdm$atlas) |> mutate(cohort_name = paste0("atlas_", cohort_name)),
+    .softValidation = TRUE
   )
 
 info(logger, "   1.2 CC set Cohorts")
@@ -75,13 +76,17 @@ cohortDetails$atlas <- summary(cdm$atlas)
 cohortDetails$cc_set <- summary(cdm$cc_set)
 cohortDetails$cc_separately <- summary(cdm$cc_separately)
 omopgenerics::bind(cohortDetails) |>
-  omopgenerics::exportSummarisedResult(path = output_folder, fileName = "cohort_details.csv")
+  omopgenerics::exportSummarisedResult(
+    path = output_folder, fileName = paste0("cohort_details_", database_name, ".csv")
+  )
 
 # Summarise overlap and density ----
 info(logger, "Summarise overlap")
 overlap <- summariseCohortOverlap(cdm$benchmark_cohorts)
 info(logger, "Summarise timing")
-timing <- summariseCohortTiming(cdm$benchmark_cohorts)
+timing <- summariseCohortTiming(cdm$benchmark_cohorts, density = TRUE)
 
 omopgenerics::bind(overlap, timing) |>
-  omopgenerics::exportSummarisedResult(path = output_folder, fileName = "cohort_comparison.csv")
+  omopgenerics::exportSummarisedResult(
+    path = output_folder, fileName = paste0("cohort_comparison_", database_name, ".csv")
+  )

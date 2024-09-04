@@ -1,6 +1,9 @@
 .Rhistory
 AtlasComparison.R
 CodeToRunDevelop.R
+sqlConnect.R
 .Rproj*
-.Rproj.user\*
+.Rproj.user*
 .Rhistory
+*.zip
+Results_*/
