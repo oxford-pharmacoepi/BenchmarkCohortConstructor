@@ -28,7 +28,7 @@ port <- Sys.getenv("...")
 host <- Sys.getenv("...")
 
 db <- dbConnect(
-  RPostgres::Postgres(),
+  "...",
   dbname = server_dbi,
   port = port,
   host = host,
@@ -45,6 +45,8 @@ runAtlas <- TRUE
 runCohortConstructorByCohort <- TRUE
 runCohortConstructorSet <- TRUE
 runEvaluateCohorts <- TRUE
+runGetOMOPDetails <- TRUE
+runEvaluateIndex <- TRUE # Only for Postgres
 
 # Run study
 source(here("RunStudy.R"))

@@ -129,6 +129,28 @@ if (runEvaluateCohorts) {
   source(here("Analysis", "cohort_similarity.R"))
 }
 
+if (runGetOMOPDetails) {
+  info(logger, "Get OMOP details")
+  tabNames <- c(
+    "person", "drug_exposure", "condition_occurrence", "procedure_occurrence",
+    "visit_occurrence", "observation_period", "measurement", "observation",
+    "death"
+  )
+  tableCounts <- NULL
+  for (tab in tabNames) {
+    tableCounts <- tableCounts |> union_all(tibble(table_name = tab, number_records = cdm[[tab]] |> tally() |> pull("n")))
+  }
+  tableCounts |>
+    mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
+    write_csv(file = here(output_folder, paste0("omop_counts_", database_name, ".csv")))
+}
+
+dbType <- attr(attr(cdm[[name]], "tbl_source"), "source_type")
+if (runEvaluateIndex & dbType == "postgresql") {
+  info(logger, "Evaluate SQL index performance for Postgres")
+  source(here("Analysis", "index_performance.R"))
+}
+
 # Zip results ----
 output_folder <- basename(output_folder)
 zip(
