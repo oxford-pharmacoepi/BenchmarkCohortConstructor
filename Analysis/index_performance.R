@@ -8,9 +8,12 @@ conceptsIndexes <- codes[c(
   "neutrophil_absolute_count", # measurement
   "asthma" # condition + observation
 )]
-obsInd <- conceptsIndexes$major_non_cardiac_surgery %in% c(915705)
+obsInd <- conceptsIndexes$major_non_cardiac_surgery %in% c(915705, 2108677, 40757123)
 conceptsIndexes$major_non_cardiac_surgery <-
   conceptsIndexes$major_non_cardiac_surgery[!obsInd]
+obsInd <- conceptsIndexes$essential_hypertension %in% c(37208293)
+conceptsIndexes$essential_hypertension <-
+  conceptsIndexes$essential_hypertension[!obsInd]
 
 # Get codes
 # analysisId = c(401, # condition occurrence
@@ -29,6 +32,7 @@ conceptsIndexes$major_non_cardiac_surgery <-
 #   sample_n(20)
 
 # NO index ----
+rlang::local_options("CohortConstructor.use_indexes" = FALSE)
 tic(msg = "No index: drug domain")
 # one table
 cdm$no_index_1 <- conceptCohort(
@@ -106,7 +110,7 @@ toc(log = TRUE)
 
 # Save results ----
 tic.log(format = FALSE) |>
-  purrr::map_df(~as_data_frame(.x)) |>
+  purrr::map_df(~as_tibble(.x)) |>
   mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
   write_csv(file = here(output_folder, paste0("sql_indexes_", database_name, ".csv")))
 

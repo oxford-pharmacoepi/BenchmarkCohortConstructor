@@ -113,7 +113,7 @@ if (runCohortConstructorByCohort) {
   }
   source(here("Analysis", "covid_strata.R"))
   tic.log(format = FALSE) |>
-    purrr::map_df(~as_data_frame(.x)) |>
+    purrr::map_df(~as_tibble(.x)) |>
     mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
     write_csv(file = here(output_folder, paste0("cc_time_by_definition_", database_name, ".csv")))
 }
@@ -145,7 +145,7 @@ if (runGetOMOPDetails) {
     write_csv(file = here(output_folder, paste0("omop_counts_", database_name, ".csv")))
 }
 
-dbType <- attr(attr(cdm[[name]], "tbl_source"), "source_type")
+dbType <- attr(attr(cdm$person, "tbl_source"), "source_type")
 if (runEvaluateIndex & dbType == "postgresql") {
   info(logger, "Evaluate SQL index performance for Postgres")
   source(here("Analysis", "index_performance.R"))
