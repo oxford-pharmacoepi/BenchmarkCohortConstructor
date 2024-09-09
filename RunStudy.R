@@ -160,7 +160,6 @@ if (runEvaluateIndex & dbType == "postgresql") {
 # Close sink
 sink(type = "message")
 sink()
-file.show(here(output_folder, paste0("sink", "_", gsub("-", "", Sys.Date()), ".txt")))
 
 # Zip results ----
 output_folder <- basename(output_folder)
