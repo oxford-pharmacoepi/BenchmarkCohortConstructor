@@ -11,7 +11,7 @@ for (json in jsons$cohort_name) {
 }
 
 tic.log(format = FALSE) |>
-  purrr::map_df(~as_data_frame(.x)) |>
+  purrr::map_df(~as_tibble(.x)) |>
   mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
   write_csv(file = here(output_folder, paste0("atlas_time_", database_name, ".csv")))
 

@@ -45,6 +45,8 @@ runAtlas <- TRUE
 runCohortConstructorByCohort <- TRUE
 runCohortConstructorSet <- TRUE
 runEvaluateCohorts <- TRUE
+runGetOMOPDetails <- TRUE
+runEvaluateIndex <- TRUE # Only for Postgres
 
 # Run study
 source(here("RunStudy.R"))

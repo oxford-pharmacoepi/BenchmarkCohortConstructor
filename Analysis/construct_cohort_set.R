@@ -384,6 +384,6 @@ if (cdm$cc_covid_strata |> dplyr::tally() |> dplyr::pull("n") == 0) {
 toc(log = TRUE)
 
 tic.log(format = FALSE) |>
-  purrr::map_df(~as_data_frame(.x)) |>
+  purrr::map_df(~as_tibble(.x)) |>
   mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
   write_csv(file = here(output_folder, paste0("cc_time_by_domain_", database_name, ".csv")))

@@ -27,6 +27,12 @@ logfile(logger) <- log_file
 level(logger) <- "INFO"
 info(logger, "Create logger")
 
+# Create sink message file ----
+info(logger, "Create sink message file")
+zz <- file(here(output_folder, paste0("sink", "_", gsub("-", "", Sys.Date()), ".txt")), open = "wt")
+sink(zz)
+sink(zz, type = "message")
+
 # jsons ----
 jsons <- readCohortSet(here("JSONCohorts"))
 
@@ -113,7 +119,7 @@ if (runCohortConstructorByCohort) {
   }
   source(here("Analysis", "covid_strata.R"))
   tic.log(format = FALSE) |>
-    purrr::map_df(~as_data_frame(.x)) |>
+    purrr::map_df(~as_tibble(.x)) |>
     mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
     write_csv(file = here(output_folder, paste0("cc_time_by_definition_", database_name, ".csv")))
 }
@@ -128,6 +134,33 @@ if (runEvaluateCohorts) {
   info(logger, "Evaluate overlap and timing")
   source(here("Analysis", "cohort_similarity.R"))
 }
+
+if (runGetOMOPDetails) {
+  info(logger, "Get OMOP details")
+  tabNames <- c(
+    "person", "drug_exposure", "condition_occurrence", "procedure_occurrence",
+    "visit_occurrence", "observation_period", "measurement", "observation",
+    "death"
+  )
+  tableCounts <- NULL
+  for (tab in tabNames) {
+    tableCounts <- tableCounts |> union_all(tibble(table_name = tab, number_records = cdm[[tab]] |> tally() |> pull("n")))
+  }
+  tableCounts |>
+    mutate(cdm_name = cdmName(cdm), package_version = as.character(packageVersion("CohortConstructor"))) |>
+    write_csv(file = here(output_folder, paste0("omop_counts_", database_name, ".csv")))
+}
+
+dbType <- attr(attr(cdm$person, "tbl_source"), "source_type")
+if (runEvaluateIndex & dbType == "postgresql") {
+  info(logger, "Evaluate SQL index performance for Postgres")
+  source(here("Analysis", "index_performance.R"))
+}
+
+# Close sink
+sink(type = "message")
+sink()
+file.show(here(output_folder, paste0("sink", "_", gsub("-", "", Sys.Date()), ".txt")))
 
 # Zip results ----
 output_folder <- basename(output_folder)

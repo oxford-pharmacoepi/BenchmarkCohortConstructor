@@ -114,7 +114,7 @@
       "RemoteRepo": "CohortConstructor",
       "RemoteUsername": "ohdsi",
       "RemoteRef": "HEAD",
-      "RemoteSha": "4538729fe3569a4d9c11878fb2cb30a99539c533",
+      "RemoteSha": "1a3eb7d3d055ad06ff861ee1b52a1fa5d9f2fb19",
       "Requirements": [
         "CDMConnector",
         "PatientProfiles",
@@ -131,7 +131,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "bbafbffb1dcbf286b600ccf586952cae"
+      "Hash": "90e39be77d744b30bc939f8da23148c7"
     },
     "DBI": {
       "Package": "DBI",
