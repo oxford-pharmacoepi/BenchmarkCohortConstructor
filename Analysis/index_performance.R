@@ -60,7 +60,7 @@ cdm$no_index_3 <- conceptCohort(
 )
 toc(log = TRUE)
 
-tic(msg = "No index: drug, condition, procedure and measurement domains")
+tic(msg = "No index: drug, condition, procedure, and measurement domains")
 # >2 tables: drug, condition, observation, procedure
 cdm$no_index_4 <- conceptCohort(
   cdm = cdm,
@@ -99,7 +99,7 @@ cdm$index_3 <- conceptCohort(
 )
 toc(log = TRUE)
 
-tic(msg = "Index: drug, condition, procedure and measurement domains")
+tic(msg = "Index: drug, condition, procedure, and measurement domains")
 # >2 tables: drug, condition, observation, procedure
 cdm$index_4 <- conceptCohort(
   cdm = cdm,
