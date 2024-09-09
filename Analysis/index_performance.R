@@ -116,5 +116,5 @@ tic.log(format = FALSE) |>
 
 omopgenerics::bind(summary(cdm$index_4), summary(cdm$no_index_4)) |>
   omopgenerics::exportSummarisedResult(
-    path = output_folder, fileName = paste0("index_cohort_details_", database_name, ".csv")
+    path = output_folder, fileName = paste0("index_counts_", database_name, ".csv")
   )
