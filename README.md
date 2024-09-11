@@ -1,7 +1,7 @@
 # Benchmark [CohortConstructor](https://github.com/OHDSI/CohortConstructor/tree/main)
 
 ## To Run
-1) **Download the Repository**: Download this entire repository as a zip folder using Code -> Download ZIP, or use GitHub Desktop.
+1) **Download the Repository**: Download this entire repository as a zip folder using Code -> Download ZIP, or clone it.
    
 3) **Open the Project**: Open the project <i>BenchmarkCohortConstructor.Rproj</i> in RStudio. The project name should appear in the top-right corner of your RStudio session.
    
