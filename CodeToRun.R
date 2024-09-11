@@ -46,7 +46,7 @@ runCohortConstructorByCohort <- TRUE
 runCohortConstructorSet <- TRUE
 runEvaluateCohorts <- TRUE
 runGetOMOPDetails <- TRUE
-runEvaluateIndex <- TRUE # Only for Postgres
+runEvaluateIndex <- TRUE 
 
 # Run study
 source(here("RunStudy.R"))
