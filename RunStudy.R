@@ -28,10 +28,10 @@ level(logger) <- "INFO"
 info(logger, "Create logger")
 
 # Create sink message file ----
-info(logger, "Create sink message file")
-zz <- file(here(output_folder, paste0("sink", "_", gsub("-", "", Sys.Date()), ".txt")), open = "wt")
-sink(zz)
-sink(zz, type = "message")
+# info(logger, "Create sink message file")
+# zz <- file(here(output_folder, paste0("sink", "_", gsub("-", "", Sys.Date()), ".txt")), open = "wt")
+# sink(zz)
+# sink(zz, type = "message")
 
 # jsons ----
 jsons <- readCohortSet(here("JSONCohorts"))
@@ -158,8 +158,8 @@ if (runEvaluateIndex & dbType == "postgresql") {
 }
 
 # Close sink
-sink(type = "message")
-sink()
+# sink(type = "message")
+# sink()
 
 # Zip results ----
 output_folder <- basename(output_folder)
