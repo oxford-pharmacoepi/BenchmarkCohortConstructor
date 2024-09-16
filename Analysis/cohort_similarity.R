@@ -83,10 +83,11 @@ omopgenerics::bind(cohortDetails) |>
 # Summarise overlap and density ----
 info(logger, "Summarise overlap")
 overlap <- summariseCohortOverlap(cdm$benchmark_cohorts)
-info(logger, "Summarise timing")
-timing <- summariseCohortTiming(cdm$benchmark_cohorts, density = TRUE)
+# info(logger, "Summarise timing")
+# timing <- summariseCohortTiming(cdm$benchmark_cohorts, density = TRUE)
 
-omopgenerics::bind(overlap, timing) |>
+# omopgenerics::bind(overlap, timing) |>
+overlap |>
   omopgenerics::exportSummarisedResult(
     path = output_folder, fileName = paste0("cohort_comparison_", database_name, ".csv")
   )
