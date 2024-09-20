@@ -169,3 +169,4 @@ zip(
 )
 
 cdm <- dropTable(cdm = cdm, name = starts_with("temp_"))
+cdmDisconnect(cdm)
