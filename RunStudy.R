@@ -58,6 +58,22 @@ cdm <- cdmFromCon(
   .softValidation = TRUE
 )
 
+if (firstObservationPeriod) {
+  cdm$observation_period <- cdm$observation_period |>
+    CohortConstructor:::joinOverlap(
+      name = "observation_period",
+      gap = 1,
+      startDate = "observation_period_start_date",
+      endDate = "observation_period_end_date",
+      by = "person_id"
+    ) |>
+    dplyr::mutate(
+      observation_period_id = as.integer(dplyr::row_number()),
+      period_type_concept_id = 44814722L
+    ) |>
+    dplyr::relocate("observation_period_id")
+}
+
 # codelists ----
 concept_sets <- c(
   "inpatient_visit",
@@ -170,3 +186,4 @@ zip(
 
 cdm <- dropTable(cdm = cdm, name = starts_with("temp_"))
 cdmDisconnect(cdm)
+
