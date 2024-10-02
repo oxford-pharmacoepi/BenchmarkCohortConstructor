@@ -47,7 +47,6 @@ runCohortConstructorSet <- TRUE
 runEvaluateCohorts <- TRUE
 runGetOMOPDetails <- TRUE
 runEvaluateIndex <- TRUE
-firstObservationPeriod <- FALSE
 
 # Run study
 source(here("RunStudy.R"))

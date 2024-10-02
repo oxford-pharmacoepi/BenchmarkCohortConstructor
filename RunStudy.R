@@ -49,16 +49,18 @@ if (runCohortConstructorByCohort) cohortsCreated <- cohortsCreated[!grepl("cc1_"
 if (runCohortConstructorSet) cohortsCreated <- cohortsCreated[!grepl("cc_", cohortsCreated)]
 if (length(cohortsCreated) == 0) cohortsCreated <- NULL
 
+collapseObservationPeriods <- FALSE
+
 cdm <- cdmFromCon(
   con = db,
   cdmSchema = cdm_database_schema,
   writeSchema = c("schema" = results_database_schema, "prefix" = tolower(table_stem)),
   cohortTables = cohortsCreated,
   cdmName = database_name,
-  .softValidation = TRUE
+  .softValidation = collapseObservationPeriods
 )
 
-if (firstObservationPeriod) {
+if (collapseObservationPeriods) {
   cdm$observation_period <- cdm$observation_period |>
     CohortConstructor:::joinOverlap(
       name = "observation_period",
