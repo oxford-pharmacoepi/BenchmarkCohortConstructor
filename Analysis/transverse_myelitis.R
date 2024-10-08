@@ -29,6 +29,6 @@ cdm$cc1_transverse_myelitis <- cdm$cc1_transverse_myelitis |>
     targetEndDate = NULL
   ) |>
   collapseCohorts(gap = 1) |>
-  mutate(start_1 = as.Date(add_days(.data$cohort_start_date, 1))) |>
+  mutate(start_1 = as.Date(add_days(.data$cohort_start_date, 1L))) |>
   addFutureObservation(futureObservationType = "date", name = "cc1_transverse_myelitis") |>
   exitAtFirstDate(dateColumns = c("start_1", "future_observation"), returnReason = FALSE)

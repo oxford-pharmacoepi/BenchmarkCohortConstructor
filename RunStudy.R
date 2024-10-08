@@ -55,7 +55,7 @@ cdm <- cdmFromCon(
   con = db,
   cdmSchema = cdm_database_schema,
   writeSchema = c("schema" = results_database_schema, "prefix" = tolower(table_stem)),
-  cohortTables = cohortsCreated,
+  # cohortTables = cohortsCreated,
   cdmName = database_name,
   .softValidation = collapseObservationPeriods
 )

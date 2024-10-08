@@ -216,7 +216,7 @@ cdm$cc_hospitalisation <- cdm$temp_cc_base |>
     name = "cc_hospitalisation"
   ) |>
   collapseCohorts(gap = 1) |>
-  mutate(end_1 = as.Date(add_days(.data$cohort_end_date, 1))) |>
+  mutate(end_1 = as.Date(add_days(.data$cohort_end_date, 1L))) |>
   addFutureObservation(futureObservationType = "date", name = "cc_hospitalisation") |>
   exitAtFirstDate(dateColumns = c("end_1", "future_observation"), returnReason = FALSE)
 
@@ -341,7 +341,7 @@ cdm$cc_transverse_myelitis <- cdm$cc_transverse_myelitis |>
     targetEndDate = NULL
   ) |>
   collapseCohorts(gap = 1) |>
-  mutate(start_1 = as.Date(add_days(.data$cohort_start_date, 1))) |>
+  mutate(start_1 = as.Date(add_days(.data$cohort_start_date, 1L))) |>
   addFutureObservation(futureObservationType = "date", name = "cc_transverse_myelitis") |>
   exitAtFirstDate(dateColumns = c("start_1", "future_observation"), returnReason = FALSE)
 
