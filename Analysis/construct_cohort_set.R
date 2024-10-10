@@ -169,44 +169,58 @@ cdm$cc_endometriosis_procedure <- cdm$cc_endometriosis_procedure |>
   )
 
 ### cc_first_depression
-# info(logger, "- cc_first_depression")
-# cdm$cc_first_depression <- cdm$temp_cc_base |>
-#   subsetCohorts(
-#     cohortId = getIds(cdm$temp_cc_base, "major_depressive_disorder"),
-#     name = "cc_first_depression"
-#   ) |>
-#   requireIsFirstEntry() |>
-#   requireCohortIntersect(
-#     targetCohortTable = "temp_cc_base",
-#     window = list(c(-Inf, 0)),
-#     intersections = 0,
-#     targetCohortId = getIds(cdm$temp_cc_base, "bipolar_disorder")
-#   ) |>
-#   requireCohortIntersect(
-#     targetCohortTable = "temp_cc_base",
-#     window = list(c(-Inf, 0)),
-#     intersections = 0,
-#     targetCohortId = getIds(cdm$temp_cc_base, "schizoaffective_disorder")
-#   ) |>
-#   requireCohortIntersect(
-#     targetCohortTable = "temp_cc_base",
-#     window = list(c(-Inf, 0)),
-#     intersections = 0,
-#     targetCohortId = getIds(cdm$temp_cc_base, "schizophrenia_not_including_paraphenia")
-#   ) |>
-#   requireCohortIntersect(
-#     targetCohortTable = "temp_cc_base",
-#     window = list(c(-Inf, 0)),
-#     intersections = 0,
-#     targetCohortId = getIds(cdm$temp_cc_base, "dementia")
-#   ) |>
-#   requireCohortIntersect(
-#     targetCohortTable = "temp_cc_base",
-#     window = list(c(-Inf, 0)),
-#     intersections = 0,
-#     targetCohortId = getIds(cdm$temp_cc_base, "psychotic_disorder")
-#   ) |>
-#   exitAtObservationEnd()
+if (useFirstDepression) {
+  info(logger, "- cc_first_depression")
+  cdm$cc_first_depression <- cdm$temp_cc_base |>
+    subsetCohorts(
+      cohortId = getIds(cdm$temp_cc_base, "major_depressive_disorder"),
+      name = "cc_first_depression"
+    ) |>
+    requireIsFirstEntry() |>
+    requireCohortIntersect(
+      targetCohortTable = "temp_cc_base",
+      window = list(c(-Inf, 0)),
+      intersections = 0,
+      targetCohortId = getIds(cdm$temp_cc_base, "bipolar_disorder"),
+      targetEndDate = NULL
+    ) |>
+    requireCohortIntersect(
+      targetCohortTable = "temp_cc_base",
+      window = list(c(-Inf, 0)),
+      intersections = 0,
+      targetCohortId = getIds(cdm$temp_cc_base, "schizoaffective_disorder"),
+      targetEndDate = NULL
+    ) |>
+    requireCohortIntersect(
+      targetCohortTable = "temp_cc_base",
+      window = list(c(-Inf, 0)),
+      intersections = 0,
+      targetCohortId = getIds(cdm$temp_cc_base, "schizophrenia_not_including_paraphenia"),
+      targetEndDate = NULL
+    ) |>
+    requireCohortIntersect(
+      targetCohortTable = "temp_cc_base",
+      window = list(c(-Inf, 0)),
+      intersections = 0,
+      targetCohortId = getIds(cdm$temp_cc_base, "dementia"),
+      targetEndDate = NULL
+    ) |>
+    requireCohortIntersect(
+      targetCohortTable = "temp_cc_base",
+      window = list(c(-Inf, 0)),
+      intersections = 0,
+      targetCohortId = getIds(cdm$temp_cc_base, "psychotic_disorder"),
+      targetEndDate = NULL
+    ) |>
+    exitAtObservationEnd()
+
+  cdm$cc_first_depression <- cdm$cc_first_depression |>
+    newCohortTable(
+      cohortSetRef = settings(cdm$cc_first_depression) |>
+        mutate(cohort_name = "cc_first_depression"),
+      .softValidation = TRUE
+    )
+}
 
 ### cc_hospitalisation
 info(logger, "- cc_hospitalisation")

@@ -36,6 +36,10 @@ info(logger, "Create logger")
 # jsons ----
 jsons <- readCohortSet(here("JSONCohorts"))
 
+if (useFirstDepression) {
+  jsons <- jsons |> filter(cohort_name != "first_depression")
+}
+
 # connecto to cdm ----
 cohortsCreated <- c(
   paste0("atlas_", jsons$cohort_name),

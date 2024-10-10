@@ -47,6 +47,7 @@ runCohortConstructorSet <- TRUE
 runEvaluateCohorts <- TRUE
 runGetOMOPDetails <- TRUE
 runEvaluateIndex <- TRUE
+useFirstDepression <- TRUE
 
 # Run study
 source(here("RunStudy.R"))
