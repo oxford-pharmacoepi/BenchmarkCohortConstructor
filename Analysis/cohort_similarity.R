@@ -70,7 +70,7 @@ cdm <- omopgenerics::bind(
 )
 
 if (useFirstDepression) {
-  cdm <- omopgenerics::bind(cdm$cc_separately, cdm$cc_first_depression, name = "cc_separately")
+  cdm <- omopgenerics::bind(cdm$cc_separately, cdm$cc1_first_depression, name = "cc_separately")
 }
 
 info(logger, "   1.4 Bind all")

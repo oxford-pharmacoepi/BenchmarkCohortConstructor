@@ -36,7 +36,7 @@ info(logger, "Create logger")
 # jsons ----
 jsons <- readCohortSet(here("JSONCohorts"))
 
-if (useFirstDepression) {
+if (!useFirstDepression) {
   jsons <- jsons |> filter(cohort_name != "first_depression")
 }
 
@@ -59,7 +59,7 @@ cdm <- cdmFromCon(
   con = db,
   cdmSchema = cdm_database_schema,
   writeSchema = c("schema" = results_database_schema, "prefix" = tolower(table_stem)),
-  # cohortTables = cohortsCreated,
+  cohortTables = cohortsCreated,
   cdmName = database_name,
   .softValidation = collapseObservationPeriods
 )

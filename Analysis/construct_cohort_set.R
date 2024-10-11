@@ -377,7 +377,8 @@ cdm$cc_covid_strata <- cdm$cc_covid |>
   addDemographics(
     ageGroup = list(c(0,50), c(51, 150)),
     priorObservation = FALSE,
-    futureObservation = FALSE
+    futureObservation = FALSE,
+    name = "cc_covid_strata"
   ) |>
   stratifyCohorts(strata = list("sex", c("sex", "age_group")), name = "cc_covid_strata")
 
