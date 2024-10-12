@@ -104,15 +104,9 @@
     },
     "CohortConstructor": {
       "Package": "CohortConstructor",
-      "Version": "0.2.2",
-      "Source": "GitHub",
-      "Remotes": "darwin-eu-dev/PatientProfiles",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "CohortConstructor",
-      "RemoteUsername": "ohdsi",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "1a3eb7d3d055ad06ff861ee1b52a1fa5d9f2fb19",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "CDMConnector",
         "PatientProfiles",
@@ -129,7 +123,7 @@
         "tidyr",
         "utils"
       ],
-      "Hash": "90e39be77d744b30bc939f8da23148c7"
+      "Hash": "3f547bc8dd155753022653e0108351fd"
     },
     "DBI": {
       "Package": "DBI",
