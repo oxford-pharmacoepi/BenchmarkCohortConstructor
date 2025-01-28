@@ -21,7 +21,7 @@
 	"ConceptSets" : [
 		{
 			"id" : 9,
-			"name" : "[HowOften] fluoroquinolone systemic",
+			"name" : "fluoroquinolone_systemic",
 			"expression" : {
 				"items" : [
 					{

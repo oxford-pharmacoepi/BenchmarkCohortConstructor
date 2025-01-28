@@ -54,7 +54,7 @@
 	"ConceptSets" : [
 		{
 			"id" : 1,
-			"name" : "Endometriosis",
+			"name" : "endometriosis",
 			"expression" : {
 				"items" : [
 					{
@@ -113,7 +113,7 @@
 		},
 		{
 			"id" : 2,
-			"name" : "Endometriosis related laproscopic procedures (Prevalent procedures for 1 endo dx cohort)",
+			"name" : "endometriosis_related_laproscopic_procedures",
 			"expression" : {
 				"items" : [
 					{

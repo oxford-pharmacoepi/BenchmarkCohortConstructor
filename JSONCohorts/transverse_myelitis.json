@@ -2,7 +2,7 @@
   "ConceptSets": [
     {
       "id": 4,
-      "name": "Transverse Myelitis",
+      "name": "transverse_myelitis",
       "expression": {
         "items": [
           {
@@ -25,7 +25,7 @@
     },
     {
       "id": 5,
-      "name": "Symptoms for Transverse Myelitis",
+      "name": "symptoms_for_transverse_myelitis",
       "expression": {
         "items": [
           {

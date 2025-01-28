@@ -2,7 +2,7 @@ info(logger, "Assess index performance")
 tic.clearlog()
 
 conceptsIndexes <- codes[c(
-  "howoften_beta_blockers", # drug
+  "beta_blockers", # drug
   "essential_hypertension", # condition
   "major_non_cardiac_surgery", # procedure
   "neutrophil_absolute_count", # measurement

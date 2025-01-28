@@ -1,44 +1,4 @@
-# functions ----
-getIds <- function(cohort, cohort_names) {
-  settings(cohort) |>
-    filter(.data$cohort_name %in% .env$cohort_names) |>
-    pull("cohort_definition_id")
-}
 
-# Checks ----
-if (nchar(table_stem) > 10){
-  cli::cli_abort(c("x" = "`table_stem` should be less than 10 characters."))
-}
-
-# Results folder ----
-output_folder <- here(paste0("Results_", database_name))
-if (!dir.exists(output_folder)) {
-  dir.create(output_folder)
-}
-
-# create logger ----
-log_file <- here(output_folder, paste0("log", "_", gsub("-", "", Sys.Date()), ".txt"))
-if (file.exists(log_file)) {
-  unlink(log_file)
-}
-
-logger <- create.logger()
-logfile(logger) <- log_file
-level(logger) <- "INFO"
-info(logger, "Create logger")
-
-# Create sink message file ----
-# info(logger, "Create sink message file")
-# zz <- file(here(output_folder, paste0("sink", "_", gsub("-", "", Sys.Date()), ".txt")), open = "wt")
-# sink(zz)
-# sink(zz, type = "message")
-
-# jsons ----
-jsons <- readCohortSet(here("JSONCohorts"))
-
-if (!useFirstDepression) {
-  jsons <- jsons |> filter(cohort_name != "first_depression")
-}
 
 # connecto to cdm ----
 cohortsCreated <- c(
@@ -59,7 +19,7 @@ cdm <- cdmFromCon(
   con = db,
   cdmSchema = cdm_database_schema,
   writeSchema = c("schema" = results_database_schema, "prefix" = tolower(table_stem)),
-  cohortTables = cohortsCreated,
+  # cohortTables = cohortsCreated,
   cdmName = database_name,
   .softValidation = collapseObservationPeriods
 )
@@ -83,10 +43,10 @@ if (collapseObservationPeriods) {
 # codelists ----
 concept_sets <- c(
   "inpatient_visit",
-  "howoften_beta_blockers",
+  "beta_blockers",
   "symptoms_for_transverse_myelitis",
   "asthma_therapy",
-  "howoften_fluoroquinolone_systemic",
+  "fluoroquinolone_systemic",
   "congenital_or_genetic_neutropenia_leukopenia_or_agranulocytosis",
   "endometriosis",
   "chronic_obstructive_lung_disease",

@@ -2,7 +2,7 @@
   "ConceptSets": [
     {
       "id": 0,
-      "name": "Neutropenia, Agranulocytosis or Unspecified Leukopenia",
+      "name": "neutropenia_agranulocytosis_or_unspecified_leukopenia",
       "expression": {
         "items": [
           {
@@ -114,7 +114,7 @@
     },
     {
       "id": 1,
-      "name": "congenital or genetic neutropenia, leukopenia or agranulocytosis",
+      "name": "congenital_or_genetic_neutropenia_leukopenia_or_agranulocytosis",
       "expression": {
         "items": [
           {
@@ -182,7 +182,7 @@
     },
     {
       "id": 2,
-      "name": "Neutrophil Absolute Count",
+      "name": "neutrophil_absolute_count",
       "expression": {
         "items": [
           {
@@ -263,7 +263,7 @@
     },
     {
       "id": 4,
-      "name": "Neutrophilia",
+      "name": "neutrophilia",
       "expression": {
         "items": [
           {

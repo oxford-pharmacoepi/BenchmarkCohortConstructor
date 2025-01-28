@@ -90,7 +90,7 @@ cdm$cc_asthma_no_copd <- cdm$temp_cc_base |>
 info(logger, "- cc_beta_blockers_hypertension")
 cdm$cc_beta_blockers_hypertension <- cdm$temp_cc_base |>
   subsetCohorts(
-    cohortId = getIds(cdm$temp_cc_base, "howoften_beta_blockers"),
+    cohortId = getIds(cdm$temp_cc_base, "beta_blockers"),
     name = "cc_beta_blockers_hypertension"
   ) |>
   collapseCohorts(gap = 90) |>

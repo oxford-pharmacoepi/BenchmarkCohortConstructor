@@ -20,7 +20,7 @@
 	"ConceptSets" : [
 		{
 			"id" : 4,
-			"name" : "Inpatient Visit",
+			"name" : "inpatient_visit",
 			"expression" : {
 				"items" : [
 					{

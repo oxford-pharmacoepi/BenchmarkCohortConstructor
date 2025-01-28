@@ -2,7 +2,7 @@
   "ConceptSets": [
     {
       "id": 2,
-      "name": "[HowOften] Beta blockers",
+      "name": "beta_blockers",
       "expression": {
         "items": [
           {
@@ -190,7 +190,7 @@
     },
     {
       "id": 3,
-      "name": "Essential hypertension",
+      "name": "essential_hypertension",
       "expression": {
         "items": [
           {

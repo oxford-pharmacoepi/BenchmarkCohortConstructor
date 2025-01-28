@@ -224,7 +224,7 @@
 	"ConceptSets" : [
 		{
 			"id" : 1,
-			"name" : "Cerebrovascular Surgery",
+			"name" : "mncs_cerebrovascular_surgery",
 			"expression" : {
 				"items" : [
 					{
@@ -623,7 +623,7 @@
 		},
 		{
 			"id" : 2,
-			"name" : "Peripheral Vascular - Lower limb arterial bypass",
+			"name" : "mncs_peripheral_vascular_lower_limb_arterial_bypass",
 			"expression" : {
 				"items" : [
 					{
@@ -835,7 +835,7 @@
 		},
 		{
 			"id" : 30,
-			"name" : "Above Knee Amputation",
+			"name" : "mncs_above_knee_amputation",
 			"expression" : {
 				"items" : [
 					{
@@ -1064,7 +1064,7 @@
 		},
 		{
 			"id" : 31,
-			"name" : "Radical hysterectomy",
+			"name" : "mncs_radical_hysterectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -1276,7 +1276,7 @@
 		},
 		{
 			"id" : 32,
-			"name" : "Hysterectomy & Oopherectomy",
+			"name" : "mncs_hysterectomy_opherectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -1794,7 +1794,7 @@
 		},
 		{
 			"id" : 33,
-			"name" : "Radical prostatectomy",
+			"name" : "mncs_radical_prostatectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -2006,7 +2006,7 @@
 		},
 		{
 			"id" : 34,
-			"name" : "Transurethral prostatectomy",
+			"name" : "mncs_transurethral_prostatectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -2218,7 +2218,7 @@
 		},
 		{
 			"id" : 38,
-			"name" : "Appendectomy",
+			"name" : "mncs_appendectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -2447,7 +2447,7 @@
 		},
 		{
 			"id" : 45,
-			"name" : "SB Colon and Rectal ",
+			"name" : "mncs_sb_colon_rectal",
 			"expression" : {
 				"items" : [
 					{
@@ -3050,7 +3050,7 @@
 		},
 		{
 			"id" : 46,
-			"name" : "Craniotomy",
+			"name" : "mncs_craniotomy",
 			"expression" : {
 				"items" : [
 					{
@@ -3517,7 +3517,7 @@
 		},
 		{
 			"id" : 47,
-			"name" : "Head and neck resection",
+			"name" : "mncs_head_neck_resection",
 			"expression" : {
 				"items" : [
 					{
@@ -4052,7 +4052,7 @@
 		},
 		{
 			"id" : 48,
-			"name" : "Knee arthroplasty",
+			"name" : "mncs_knee_arthroplasty",
 			"expression" : {
 				"items" : [
 					{
@@ -4451,7 +4451,7 @@
 		},
 		{
 			"id" : 51,
-			"name" : "Complex Visceral Resection 1 - Liver",
+			"name" : "mncs_complex_visceral_resection_liver",
 			"expression" : {
 				"items" : [
 					{
@@ -4901,7 +4901,7 @@
 		},
 		{
 			"id" : 55,
-			"name" : "Iliac-Femoral Bypass",
+			"name" : "mncs_iliac_femoral_bypass",
 			"expression" : {
 				"items" : [
 					{
@@ -5113,7 +5113,7 @@
 		},
 		{
 			"id" : 56,
-			"name" : "Abdominal Aortic Aneurysm Repair",
+			"name" : "mncs_abdominal_aortic_aneurysm_repair",
 			"expression" : {
 				"items" : [
 					{
@@ -5818,7 +5818,7 @@
 		},
 		{
 			"id" : 57,
-			"name" : "Celiac Artery Revascularization",
+			"name" : "mncs_celiac_artery_revascularization",
 			"expression" : {
 				"items" : [
 					{
@@ -6200,7 +6200,7 @@
 		},
 		{
 			"id" : 58,
-			"name" : "Superior Mesenteric Artery Revascularization",
+			"name" : "mncs_superior_mesenteric_artery_revascularization",
 			"expression" : {
 				"items" : [
 					{
@@ -6480,7 +6480,7 @@
 		},
 		{
 			"id" : 59,
-			"name" : "Renal Artery Revascularization",
+			"name" : "mncs_renal_artery_revascularization",
 			"expression" : {
 				"items" : [
 					{
@@ -6726,7 +6726,7 @@
 		},
 		{
 			"id" : 61,
-			"name" : "Thoracic Vascular Surgery",
+			"name" : "mncs_thoracic_vascular_surgery",
 			"expression" : {
 				"items" : [
 					{
@@ -7329,7 +7329,7 @@
 		},
 		{
 			"id" : 62,
-			"name" : "Cytoreductive surgery",
+			"name" : "mncs_mytoreductive_surgery",
 			"expression" : {
 				"items" : [
 					{
@@ -7575,7 +7575,7 @@
 		},
 		{
 			"id" : 63,
-			"name" : "Thoracic resection",
+			"name" : "mncs_thoracic_resection",
 			"expression" : {
 				"items" : [
 					{
@@ -8229,7 +8229,7 @@
 		},
 		{
 			"id" : 64,
-			"name" : "Stomach Surgery",
+			"name" : "mncs_stomach_surgery",
 			"expression" : {
 				"items" : [
 					{
@@ -8526,7 +8526,7 @@
 		},
 		{
 			"id" : 65,
-			"name" : "Complex Visceral Resection 3 - Pancreas / biliary",
+			"name" : "mncs_complex_visceral_resection_pancreas_biliary",
 			"expression" : {
 				"items" : [
 					{
@@ -8772,7 +8772,7 @@
 		},
 		{
 			"id" : 66,
-			"name" : "Complex Visceral Resection 2 - Oesophagus",
+			"name" : "mncs_complex_visceral_resection_oesophagus",
 			"expression" : {
 				"items" : [
 					{
@@ -9018,7 +9018,7 @@
 		},
 		{
 			"id" : 67,
-			"name" : "Lymph node dissection (includes surgeries that are radical tissue removal)",
+			"name" : "mncs_lymph_node_dissection",
 			"expression" : {
 				"items" : [
 					{
@@ -9587,7 +9587,7 @@
 		},
 		{
 			"id" : 68,
-			"name" : "Pneumonectomy",
+			"name" : "mncs_pneumonectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -9731,7 +9731,7 @@
 		},
 		{
 			"id" : 69,
-			"name" : "Major Hip or Pelvic Surgery",
+			"name" : "mncs_major_hip_pelvic_surgery",
 			"expression" : {
 				"items" : [
 					{
@@ -10674,7 +10674,7 @@
 		},
 		{
 			"id" : 70,
-			"name" : "Internal Fixation of Femur",
+			"name" : "mncs_internal_fixation_femur",
 			"expression" : {
 				"items" : [
 					{
@@ -10920,7 +10920,7 @@
 		},
 		{
 			"id" : 71,
-			"name" : "Below Knee Amputation",
+			"name" : "mncs_below_knee_amputation",
 			"expression" : {
 				"items" : [
 					{
@@ -11370,7 +11370,7 @@
 		},
 		{
 			"id" : 72,
-			"name" : "Lobectomy",
+			"name" : "mncs_lobectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -11633,7 +11633,7 @@
 		},
 		{
 			"id" : 73,
-			"name" : "Splenectomy",
+			"name" : "mncs_splenectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -11862,7 +11862,7 @@
 		},
 		{
 			"id" : 74,
-			"name" : "Adrenalectomy",
+			"name" : "mncs_adrenalectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -12125,7 +12125,7 @@
 		},
 		{
 			"id" : 75,
-			"name" : "Cholecystectomy",
+			"name" : "mncs_cholecystectomy",
 			"expression" : {
 				"items" : [
 					{
@@ -12677,7 +12677,7 @@
 		},
 		{
 			"id" : 76,
-			"name" : "Breast reconstruction",
+			"name" : "mncs_breast_reconstruction",
 			"expression" : {
 				"items" : [
 					{
@@ -12855,7 +12855,7 @@
 		},
 		{
 			"id" : 78,
-			"name" : "Ureteric Kidney and Bladder Surgery",
+			"name" : "mncs_ureteric_kidney_bladder_surgery",
 			"expression" : {
 				"items" : [
 					{
@@ -13516,7 +13516,7 @@
 	},
 	"InclusionRules" : [
 		{
-			"name" : "Age above 18 years",
+			"name" : "mncs_age_above_18",
 			"expression" : {
 				"Type" : "ALL",
 				"CriteriaList" : [],

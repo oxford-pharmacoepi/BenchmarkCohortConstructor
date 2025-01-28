@@ -2,7 +2,7 @@
   "ConceptSets": [
     {
       "id": 4,
-      "name": "COVID-19",
+      "name": "covid_19",
       "expression": {
         "items": [
           {
@@ -25,7 +25,7 @@
     },
     {
       "id": 5,
-      "name": "SARS-CoV-2 test",
+      "name": "sars_cov_2_test",
       "expression": {
         "items": [
           {

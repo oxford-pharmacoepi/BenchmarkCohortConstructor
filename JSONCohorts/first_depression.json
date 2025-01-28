@@ -158,7 +158,7 @@
 	"ConceptSets" : [
 		{
 			"id" : 6,
-			"name" : "Major depressive disorder",
+			"name" : "major_depressive_disorder",
 			"expression" : {
 				"items" : [
 					{
@@ -455,7 +455,7 @@
 		},
 		{
 			"id" : 7,
-			"name" : "Bipolar disorder",
+			"name" : "bipolar_disorder",
 			"expression" : {
 				"items" : [
 					{
@@ -480,7 +480,7 @@
 		},
 		{
 			"id" : 8,
-			"name" : "Schizoaffective disorder",
+			"name" : "schizoaffective_disorder",
 			"expression" : {
 				"items" : [
 					{
@@ -505,7 +505,7 @@
 		},
 		{
 			"id" : 9,
-			"name" : "Schizophrenia not including Paraphenia",
+			"name" : "schizophrenia_not_including_paraphenia",
 			"expression" : {
 				"items" : [
 					{
@@ -615,7 +615,7 @@
 		},
 		{
 			"id" : 10,
-			"name" : "Dementia",
+			"name" : "dementia",
 			"expression" : {
 				"items" : [
 					{
@@ -929,7 +929,7 @@
 		},
 		{
 			"id" : 11,
-			"name" : "Psychotic disorder",
+			"name" : "psychotic_disorder",
 			"expression" : {
 				"items" : [
 					{
